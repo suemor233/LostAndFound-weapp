@@ -4,12 +4,15 @@ page {
   --white: #fff;
   --yellow: #FFE33F;
   --gray: #f7f7f7;
+  --black: #000;
+  --button-gray: #5e5959;
   --main-bg-color: var(--gray);
   --primary: var(--yellow);
 }
 
 page {
   background: var(--main-bg-color);
+
 }
 
 .center  {

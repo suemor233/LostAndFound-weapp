@@ -1,0 +1,6 @@
+.fg {
+  width: 1px;
+  opacity: .1;
+  height: 40px;
+  background-color: var(--black);
+}

@@ -6,6 +6,7 @@ specifiers:
   '@pmmmwh/react-refresh-webpack-plugin': ^0.5.5
   '@suemor/eslint-config-react-ts': ^1.0.1
   '@suemor/prettier': ^1.0.1
+  '@taroify/core': 0.1.0-alpha.1
   '@tarojs/cli': 3.5.4
   '@tarojs/components': 3.5.4
   '@tarojs/helper': 3.5.4
@@ -27,7 +28,7 @@ specifiers:
   '@types/webpack-env': ^1.13.6
   '@typescript-eslint/eslint-plugin': ^5.20.0
   '@typescript-eslint/parser': ^5.20.0
-  babel-plugin-import: ^1.13.3
+  babel-plugin-import: ^1.13.5
   babel-preset-taro: 3.5.4
   eslint: ^8.12.0
   eslint-config-taro: 3.5.4
@@ -52,6 +53,7 @@ specifiers:
 
 dependencies:
   '@babel/runtime': 7.18.9
+  '@taroify/core': 0.1.0-alpha.1_7z7c46cevd7qdizsjigqg7cyhu
   '@tarojs/components': 3.5.4_@types+react@18.0.17
   '@tarojs/helper': 3.5.4
   '@tarojs/plugin-framework-react': 3.5.4_kh5xvup7dh7vubbtxkbq4vjpum
@@ -2142,6 +2144,50 @@ packages:
       defer-to-connect: 1.1.3
     dev: true
 
+  /@taroify/core/0.1.0-alpha.1_7z7c46cevd7qdizsjigqg7cyhu:
+    resolution: {integrity: sha512-RCS/YQVr9YTqDkYqPh0GpottIqAyR7O9CfSxSz51c/HqLU0U4DA3ykPMor9k3d6K5A3wFzw++r61RkEfzp9+UA==}
+    peerDependencies:
+      '@tarojs/components': ^3.3.9
+      '@tarojs/taro': ^3.3.9
+      react: ^17.0.2
+    dependencies:
+      '@taroify/hooks': 0.1.0-alpha.1_zwurhvd6t4ptz3kfhkwowaqt3e
+      '@taroify/icons': 0.1.0-alpha.1_@tarojs+components@3.5.4
+      '@tarojs/components': 3.5.4_@types+react@18.0.17
+      '@tarojs/taro': 3.5.4_@types+react@18.0.17
+      classnames: 2.3.1
+      lodash: 4.17.21
+      promise: 8.1.0
+      raf: 3.4.1
+      react: 18.2.0
+      react-is: 17.0.2
+      react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
+    transitivePeerDependencies:
+      - react-dom
+    dev: false
+
+  /@taroify/hooks/0.1.0-alpha.1_zwurhvd6t4ptz3kfhkwowaqt3e:
+    resolution: {integrity: sha512-hYpivC4WUP1DAT2Hy1xHSB54DvJWHqgG9wrbeoc0EuRSeKEVesnDp83bB68cYjovWv+aoAszefpL1h55XKQVVA==}
+    peerDependencies:
+      '@tarojs/taro': ^3.3.6
+      lodash: ^4.17.21
+      react: ^17.0.2
+    dependencies:
+      '@tarojs/taro': 3.5.4_@types+react@18.0.17
+      '@vant/area-data': 1.3.1
+      lodash: 4.17.21
+      react: 18.2.0
+    dev: false
+
+  /@taroify/icons/0.1.0-alpha.1_@tarojs+components@3.5.4:
+    resolution: {integrity: sha512-KGcsPoug16JvhsnfQi8cgYXBgT4wrTwyJ1CL6owiD9ro+Iokx64rQ8NnCkreJMKTj88y3THRNz/UyHh3/92t2g==}
+    peerDependencies:
+      '@tarojs/components': ^3.3.9
+    dependencies:
+      '@tarojs/components': 3.5.4_@types+react@18.0.17
+      classnames: 2.3.1
+    dev: false
+
   /@tarojs/api/3.5.4:
     resolution: {integrity: sha512-8dDFO7SV9hX4BEdUyjRVqzU/KmkqkIBQNGa2d1tw4EGyXHS/8e5rhyAQj59O05qzT8w3HBEH9uR5lz5oNRr/sQ==}
     dependencies:
@@ -3112,6 +3158,10 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
+  /@vant/area-data/1.3.1:
+    resolution: {integrity: sha512-xji2kfVBXzFYmHAJNbhYjiRJ4GnN+enbTmtx6FnpTyxs9sUcFtS11BZ23hYCGuj4s02gXyrzUBTXGqhX5IKHIw==}
+    dev: false
+
   /@webassemblyjs/ast/1.11.1:
     resolution: {integrity: sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw==}
     dependencies:
@@ -3586,6 +3636,10 @@ packages:
     resolution: {integrity: sha512-3duEwti880xqi4eAMN8AyR4a0ByT90zoYdLlevfrvU43vb0YZwZVfxOgxWrLXXXpyugL0hNZc9G6BiB5B3nUug==}
     engines: {node: '>=8'}
     dev: true
+
+  /asap/2.0.6:
+    resolution: {integrity: sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==}
+    dev: false
 
   /asn1/0.2.6:
     resolution: {integrity: sha512-ix/FxPn0MDjeyJ7i/yoHGFt/EX6LyNbxSEhPPXODPL+KB0VPk86UYfL0lMdy+KCnv+fmvIzySwaK5COwqVbWTQ==}
@@ -5716,6 +5770,13 @@ packages:
     dependencies:
       utila: 0.4.0
     dev: true
+
+  /dom-helpers/5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
+    dependencies:
+      '@babel/runtime': 7.18.9
+      csstype: 3.1.0
+    dev: false
 
   /dom-serializer/0.2.2:
     resolution: {integrity: sha512-2/xPb3ORsQ42nHYiSunXkDjPLBaEj/xTwUO4B7XCZQTRk7EBtTOPaygh10YAAh2OI1Qrp6NWfpAhzswj0ydt9g==}
@@ -10414,7 +10475,6 @@ packages:
 
   /performance-now/2.1.0:
     resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
-    dev: true
 
   /picocolors/0.2.1:
     resolution: {integrity: sha512-cMlDqaLEqfSaW8Z7N5Jw+lyIW869EzT73/F5lhtY9cLGoVxSXznfgfXMO0Z5K0o0Q2TkTXq+0KFsdnSe3jDViA==}
@@ -11507,13 +11567,18 @@ packages:
   /promise-polyfill/7.1.2:
     resolution: {integrity: sha512-FuEc12/eKqqoRYIGBrUptCBRhobL19PS2U31vMNTfyck1FxPyMfgsXyW4Mav85y/ZN1hop3hOwRlUDok23oYfQ==}
 
+  /promise/8.1.0:
+    resolution: {integrity: sha512-W04AqnILOL/sPRXziNicCjSNRruLAuIHEOVBazepu0545DDNGYHz7ar9ZgZ1fMU8/MA4mVxp5rkBWRi6OXIy3Q==}
+    dependencies:
+      asap: 2.0.6
+    dev: false
+
   /prop-types/15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /proto-list/1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
@@ -11595,6 +11660,12 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /raf/3.4.1:
+    resolution: {integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==}
+    dependencies:
+      performance-now: 2.1.0
+    dev: false
+
   /randomatic/3.1.1:
     resolution: {integrity: sha512-TuDE5KxZ0J461RVjrJZCJc+J+zCkTb1MbH9AQUq68sMhOMcy9jLcb3BrZKgp9q9Ncltdg4QVqWrH02W2EFFVYw==}
     engines: {node: '>= 0.10.0'}
@@ -11646,7 +11717,10 @@ packages:
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-    dev: true
+
+  /react-is/17.0.2:
+    resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
+    dev: false
 
   /react-reconciler/0.27.0_react@18.2.0:
     resolution: {integrity: sha512-HmMDKciQjYmBRGuuhIaKA1ba/7a+UsM5FzOZsMO2JYHt9Jh8reCb7j1eDC95NOyUlKM9KRyvdx0flBuDvYSBoA==}
@@ -11667,6 +11741,20 @@ packages:
     resolution: {integrity: sha512-Hwln1VNuGl/6bVwnd0Xdn1e84gT/8T9aYNL+HAKDArLCS7LWjwr7StE30IEYbIkx0Vi3vs+coQxe+SQDbGbbpA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.18.9
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
