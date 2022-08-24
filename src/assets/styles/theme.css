@@ -1,0 +1,13 @@
+page {
+  --blue: #11AFFE;
+  --gray: #f7f7f7;
+  --white: #fff;
+  --yellow: #FFE33F;
+  --gray: #ADADAD
+  --main-bg-color: var(--gray);
+  --primary: var(--yellow);
+}
+
+page {
+  background: var(--main-bg-color);
+}
