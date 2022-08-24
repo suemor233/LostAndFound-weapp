@@ -1,5 +1,4 @@
 import { observer } from 'mobx-react-lite'
-import { useCallback } from 'react'
 
 import { useStore } from '@/store'
 import { CoverImage, CoverView } from '@tarojs/components'
@@ -14,7 +13,6 @@ const CustomTabBar = () => {
   } = tabStore
   const switchTab = (id, url) => {
     tabStore.updateTab(id)
-    console.log(url);
     Taro.switchTab({ url })
   }
 

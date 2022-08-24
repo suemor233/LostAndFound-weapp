@@ -1,16 +1,16 @@
 
 export default {
-  pages: ["pages/dynamic/index","pages/publish/index","pages/my/index"],
+  pages: ["pages/user/index","pages/dynamic/index","pages/publish/index"],
   window: {
     backgroundTextStyle: "light",
-    navigationBarBackgroundColor: "#fff",
+    navigationBarBackgroundColor: "#FFE33F",
     navigationBarTitleText: "WeChat",
     navigationBarTextStyle: "black",
   },
   tabBar: {
     custom: true,
-    color: '#000000',
-    selectedColor: '#DC143C',
+    color: '#ADADAD',
+    selectedColor: '#ecca0a',
     backgroundColor: '#ffffff',
     list: [
       {
@@ -26,9 +26,9 @@ export default {
         text: '发布'
       },
       {
-        pagePath: 'pages/my/index',
-        selectedIconPath: 'assets/img/my_select.png',
-        iconPath: 'assets/img/my.png',
+        pagePath: 'pages/user/index',
+        selectedIconPath: 'assets/img/user_select.png',
+        iconPath: 'assets/img/user.png',
         text: '我的'
       },
     ]

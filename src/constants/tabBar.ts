@@ -18,9 +18,9 @@ export const tabBar =  {
       text: '发布'
     },
     {
-      pagePath: '/pages/my/index',
-      selectedIconPath: '../assets/img/my_select.png',
-      iconPath: '../assets/img/my.png',
+      pagePath: '/pages/user/index',
+      selectedIconPath: '../assets/img/user_select.png',
+      iconPath: '../assets/img/user.png',
       text: '我的'
     },
   ]

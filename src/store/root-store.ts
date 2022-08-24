@@ -1,10 +1,13 @@
 import TabStore from "./tab";
+import UserStore from "./user";
 
 export interface RootStore {
-  tabStore:TabStore
+  tabStore:TabStore,
+  userStore:UserStore
 }
 export class RootStore {
   constructor() {
-    this.tabStore = new TabStore()
+    this.tabStore = new TabStore(),
+    this.userStore = new UserStore()
   }
 }

@@ -3,11 +3,20 @@ page {
   --gray: #f7f7f7;
   --white: #fff;
   --yellow: #FFE33F;
-  --gray: #ADADAD
+  --gray: #f7f7f7;
   --main-bg-color: var(--gray);
   --primary: var(--yellow);
 }
 
 page {
   background: var(--main-bg-color);
+}
+
+.center  {
+  display: flex;
+  justify-content: center;
+}
+
+.fx {
+  display: flex;
 }
