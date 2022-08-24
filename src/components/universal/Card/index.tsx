@@ -8,7 +8,7 @@ interface IProps extends PropsWithChildren {
 }
 
 const Card: FC<IProps> = ({ children,className }) => {
-  return <View className={`rounded-2xl shadow-md ${className}`}>{children}</View>
+  return <View className={`rounded-2xl shadow-md bg-white ${className}`}>{children}</View>
 }
 
 export default Card

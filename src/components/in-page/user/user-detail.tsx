@@ -1,6 +1,4 @@
 import { observer } from 'mobx-react-lite'
-import { Fragment } from 'react'
-
 import { Avatar } from '@/components/universal/Avatar'
 import { Button } from '@/components/universal/Button'
 import Card from '@/components/universal/Card'
@@ -10,13 +8,12 @@ import { useStore } from '@/store'
 import { Text, View } from '@tarojs/components'
 
 import styles from './index.module.css'
-import UserPublish from './user-publish'
 
 const UserDetail = () => {
   const { userStore } = useStore()
   return (
-    <View className="bg-white w-full p-5 fx flex-col shadow-md">
-      <View className="fx flex-row">
+    <Card className=" p-4 fx flex-col mt-5 mx-5">
+      <View className="fx flex-row ml-3">
         <Avatar
           imageUrl={userStore.user?.avatarUrl || url.defaultAvatar}
           size={60}
@@ -39,7 +36,7 @@ const UserDetail = () => {
             <View key={item.name} className={`fx ${index < userNum.length - 1 ? 'w-full' : 'w-3_4'}`}>
               <View className="fx flex-col">
                 <Text className="text-center">{item.num}</Text>
-                <Text className="text-gray-600">{item.name}</Text>
+                <Text className="text-gray-500">{item.name}</Text>
               </View>
               {index < userNum.length - 1 && (
                 <View className={`${styles.fg}`} style={{ margin: '0 auto' }} />
@@ -47,8 +44,7 @@ const UserDetail = () => {
             </View>
         ))}
       </View>
-      <UserPublish />
-    </View>
+    </Card>
   )
 }
 

@@ -4,3 +4,8 @@
   height: 40px;
   background-color: var(--black);
 }
+
+
+.line-width {
+  width: 10px;
+}
