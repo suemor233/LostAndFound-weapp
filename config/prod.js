@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     NODE_ENV: '"production"',
+    API_URL: JSON.stringify('http://192.168.1.8:2349')
   },
   defineConstants: {},
   mini: {},

@@ -24,8 +24,8 @@ const UserDetail = () => {
           ) : (
             <Button
               openType="getUserInfo"
-              onClick={() => userStore.authorizeLogin()}
-      
+              onClick={() => userStore.getUserInfo()}
+
             >
               授权登录
             </Button>

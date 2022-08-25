@@ -1,8 +1,6 @@
 export interface userType {
+  id:string
+  openid:string
   avatarUrl: string
-  country: string
-  gender: number
-  language: string
   nickName: string
-  province: string
 }
