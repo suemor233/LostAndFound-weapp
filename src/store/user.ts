@@ -23,15 +23,9 @@ export default class UserStore {
           })
       },
     })
+  }
 
-    // this.user = {
-    //   avatarUrl:
-    //     'https://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEJx4BCnqjdnkSTRlCrRnMnBQkFf36jbopY8y115v1vUicicGq6eZlicURbHDmNgXk2t3wMJyGo8cc4sg/132',
-    //   country: '',
-    //   gender: 0,
-    //   language: 'zh_CN',
-    //   nickName: 'suemor',
-    //   province: '',
-    // }
+  isLogin() {
+    return !!this.user
   }
 }

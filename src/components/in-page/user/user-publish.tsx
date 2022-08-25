@@ -6,14 +6,14 @@ import { userPulish } from '../../../constants/icon'
 
 const UserPublish = () => {
   return (
-    <Card className="mx-2 mt-4 relative">
+    <View className=" mt-4 relative bg-white">
       <View className='p-3'>
         <View className="mb-4 fx">
           <View className={`${styles['line-width']} h-6 bg-yellow-500 absolute left-0`} />
           <Text className="">我的发布</Text>
         </View>
         <View className="fx flex-row justify-between px-4">
-          {userPulish.map((item, index) => (
+          {userPulish.map((item) => (
             <View className="fx flex-col" key={item.name}>
               <Image
                 className="fx justify-center"
@@ -25,7 +25,7 @@ const UserPublish = () => {
           ))}
         </View>
       </View>
-    </Card>
+    </View>
   )
 }
 

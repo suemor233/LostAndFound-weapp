@@ -13,11 +13,11 @@ interface IProps extends PropsWithChildren {
 }
 
 export const Button: FC<IProps> = (props) => {
-  const { openType,onClick } = props
+  const { openType,onClick,style } = props
   return (
     <TButton
       color={props.type}
-      style={{ background: 'var(--yellow)', color: 'var(--button-gray)' }}
+      style={{ background: 'var(--yellow)', color: 'var(--button-gray)' ,...style}}
       shape={'round'}
       openType={openType}
       onClick={onClick}
