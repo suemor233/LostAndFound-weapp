@@ -1,6 +1,6 @@
 
 export default {
-  pages: ["pages/user/index","pages/dynamic/index","pages/publish/index"],
+  pages: ["pages/dynamic/index","pages/publish/index","pages/user/index",],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#FFE33F",

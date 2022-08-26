@@ -5,7 +5,9 @@ import UserList from '@/components/in-page/user/user-list'
 import UserPublish from '@/components/in-page/user/user-publish'
 import { View } from '@tarojs/components'
 
+
 const User = () => {
+
   return (
     <View>
       <UserDetail />

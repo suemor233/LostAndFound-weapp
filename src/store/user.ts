@@ -1,12 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx'
-
 import type { userType } from '@/modules/user'
 import { getToken, setToken } from '@/utils/auth'
 import Taro from '@tarojs/taro'
-
 import { check, getUserInfo, login } from '../api/modules/user'
 import { removeToken } from '../utils/auth'
-import { isDev } from '../utils/state';
 
 interface LoginType {
   avatarUrl: string
@@ -34,13 +31,13 @@ export default class UserStore {
     return await Taro.login({
       success: async (res) => {
         const userData = await login({
-          id: res.code,
-          nickName: user.nickName,
-          avatarUrl: user.avatarUrl,
+          id: res.code ,
+          nickName:  user.nickName || '',
+          avatarUrl: user.avatarUrl || '',
         })
         setToken(userData.token)
         this.userInfoByToken()
-      },
+      }
     })
   }
 

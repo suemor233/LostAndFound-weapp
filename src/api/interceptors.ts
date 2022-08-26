@@ -1,9 +1,11 @@
+import Taro from "@tarojs/taro"
 
 const customInterceptor = (chain) => {
   const requestParams = chain.requestParams
 
   return chain.proceed(requestParams).then((res) => {
     const { data } = res
+
     if (data.ok === 0) {
       if (Array.isArray(res.message)) {
        console.log(data.message[0])
