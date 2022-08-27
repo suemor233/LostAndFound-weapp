@@ -1,16 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import DropList from '@/components/in-page/publish'
 import ContentLayout from '@/components/layouts/BasicLayout'
 import Loginverify from '@/components/layouts/BasicLayout/login-verify'
-import { useStore } from '@/store'
-import { Toast } from '@/utils/toast'
 import { Backdrop, Popup } from '@taroify/core'
-import { Text, View } from '@tarojs/components'
-import { useDidHide, useDidShow, useLoad, useTabItemTap } from '@tarojs/taro'
-import Taro from '@tarojs/taro'
+import { useDidHide, useDidShow } from '@tarojs/taro'
 
-import styles from './index.module.css'
 
 const Publish = () => {
   const [open, setOpen] = useState(false)

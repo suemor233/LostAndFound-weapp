@@ -1,4 +1,3 @@
-import Card from '@/components/universal/Card'
 import { Image } from '@taroify/core'
 import { Text, View } from '@tarojs/components'
 import styles from './index.module.css';

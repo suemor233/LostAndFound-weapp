@@ -1,7 +1,6 @@
-import { FC, PropsWithChildren } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 
-import Taro from '@tarojs/taro'
-import { useDidShow } from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import { useStore } from '@/store'
 
 const Loginverify: FC<PropsWithChildren> = ({ children }) => {

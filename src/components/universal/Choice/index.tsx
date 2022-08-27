@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 
 import { Image } from '@taroify/core'
 import { View } from '@tarojs/components'

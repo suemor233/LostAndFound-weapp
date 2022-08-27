@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react'
-import { FC } from 'react'
+import type { FC } from 'react';
+import { useRef, useState  } from 'react'
 
 import Choice from '@/components/universal/Choice'
 import { Form, Input, Picker, Popup } from '@taroify/core'
-import { FormItemInstance } from '@taroify/core/form'
+import type { FormItemInstance } from '@taroify/core/form'
 
 interface IProps {
   list: string[]

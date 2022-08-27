@@ -1,4 +1,3 @@
-import { userNum } from '@/constants/icon'
 import { Cell } from '@taroify/core'
 import List from '@taroify/core/list/list'
 

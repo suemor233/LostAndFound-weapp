@@ -1,6 +1,5 @@
-import { FC, useCallback } from 'react'
+import type { FC} from 'react';
 
-import TranslateCard from '@/components/universal/Card/TranslateCard'
 import Choice from '@/components/universal/Choice'
 import { Image } from '@taroify/core'
 import { Text, View } from '@tarojs/components'

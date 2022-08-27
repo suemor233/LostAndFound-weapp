@@ -1,4 +1,3 @@
-import Taro from "@tarojs/taro"
 
 const customInterceptor = (chain) => {
   const requestParams = chain.requestParams

@@ -3,7 +3,6 @@ import { makeAutoObservable, runInAction } from 'mobx'
 import type { userType } from '@/modules/user'
 import { getToken, setToken } from '@/utils/auth'
 import { Toast } from '@/utils/toast'
-import { Notify } from '@taroify/core'
 import Taro from '@tarojs/taro'
 
 import { check, getUserInfo, login, patchUser } from '../api/modules/user'

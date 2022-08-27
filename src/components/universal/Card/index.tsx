@@ -1,5 +1,4 @@
-import type { PropsWithChildren } from 'react'
-import { FC } from 'react'
+import type { PropsWithChildren , FC } from 'react'
 
 import { View } from '@tarojs/components'
 

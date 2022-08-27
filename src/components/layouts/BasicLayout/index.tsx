@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 
 import { ConfigProvider, Notify, Toast } from '@taroify/core'
 import { View } from '@tarojs/components'

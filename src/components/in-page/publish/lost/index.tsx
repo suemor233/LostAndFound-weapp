@@ -1,10 +1,12 @@
 
 import PopupForm from '@/components/universal/PopupForm'
 import { category } from '@/constants/publish/lost/category'
-import { Button, Cell, Form, Input, Picker, Popup, Toast } from '@taroify/core'
-import { FormItemInstance } from '@taroify/core/form'
-import { BaseEventOrig, FormProps, View } from '@tarojs/components'
-import { FC, PropsWithChildren, useRef, useState } from 'react'
+import { Button, Cell, Form, Input, Picker, Toast } from '@taroify/core'
+import type { FormItemInstance } from '@taroify/core/form'
+import type { BaseEventOrig, FormProps} from '@tarojs/components';
+import { View } from '@tarojs/components'
+import type { FC, PropsWithChildren} from 'react';
+import { useRef, useState } from 'react'
 
 
 

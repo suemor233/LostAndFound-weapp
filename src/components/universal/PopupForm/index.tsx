@@ -1,9 +1,8 @@
-import { PropsWithChildren, useRef, useState } from 'react'
-import { FC } from 'react'
+import type { PropsWithChildren, FC } from 'react';
 
 import Choice from '@/components/universal/Choice'
-import { Form, Input, Picker, Popup } from '@taroify/core'
-import { FormItemInstance } from '@taroify/core/form'
+import { Form, Input, Popup } from '@taroify/core'
+import type { FormItemInstance } from '@taroify/core/form'
 
 interface IProps extends PropsWithChildren {
   formName: string

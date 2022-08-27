@@ -1,6 +1,5 @@
 import './assets/styles/main.css'
 import 'windi.css'
-import {  Notify } from "@taroify/core"
 
 import { RootStoreProvider } from './context/root-store'
 
