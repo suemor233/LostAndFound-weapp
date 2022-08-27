@@ -1,11 +1,13 @@
 import { makeAutoObservable, runInAction } from 'mobx'
+
 import type { userType } from '@/modules/user'
 import { getToken, setToken } from '@/utils/auth'
+import { Toast } from '@/utils/toast'
+import { Notify } from '@taroify/core'
 import Taro from '@tarojs/taro'
+
 import { check, getUserInfo, login, patchUser } from '../api/modules/user'
 import { removeToken } from '../utils/auth'
-import { Notify } from '@taroify/core'
-import { Toast } from '@/utils/toast'
 
 export interface LoginType {
   avatarUrl: string
@@ -33,14 +35,14 @@ export default class UserStore {
     return await Taro.login({
       success: async (res) => {
         const userData = await login({
-          id: res.code ,
-          nickName:  user.nickName || '',
+          id: res.code,
+          nickName: user.nickName || '',
           avatarUrl: user.avatarUrl || '',
         })
         setToken(userData.token)
         this.userInfoByToken()
         Toast.success('登录成功')
-      }
+      },
     })
   }
 
@@ -56,15 +58,16 @@ export default class UserStore {
   }
 
   async checkToken() {
-    const token = Taro.getStorageSync('user-token')
-    if (!token) {
-      return
-    }
-    const user = await check()
-    return !!user
+      const token = Taro.getStorageSync('user-token') || null
+      if (!token) {
+        return
+      }
+      const user = await check()
+      return !!user
   }
 
   isLogin() {
     return !!this.user
   }
+  
 }

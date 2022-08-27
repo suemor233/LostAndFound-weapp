@@ -6,9 +6,8 @@ import { useStore } from '@/store'
 
 const Loginverify: FC<PropsWithChildren> = ({ children }) => {
   const { userStore } = useStore()
-  useDidShow(() => {
-    setTimeout(()=>{
-      if (!userStore.isLogin()) {
+  useDidShow(async() => {
+      if (!userStore.checkToken()) {
         Taro.switchTab({
           url: '/pages/user/index',
         })
@@ -19,10 +18,9 @@ const Loginverify: FC<PropsWithChildren> = ({ children }) => {
           })
         })
       }
-    })
   })
 
-  if (!userStore.isLogin()) {
+  if (!userStore.user) {
     return null
   }
 

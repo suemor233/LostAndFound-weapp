@@ -15,10 +15,20 @@ interface IPros {
 // Todo suggest refactor becaouse of component flashing
 const DropList: FC<IPros> = (props) => {
   return (
-    <View className='h-full'>
-
-      <View className="px-5 py-1 mt-5 fx h-full flex-col justify-center">
-
+    <View className="h-full relative px-5 py-1 mt-5">
+      {/* <View className="absolute w-full">
+        <View className="w-full fx justifbe">
+          <View className="fx flex-col ">
+            <Text>123</Text>
+            <Text>微服务</Text>
+          </View>
+          <View className="fx flex-col">
+            <Text>123</Text>
+            <Text>史蒂夫</Text>
+          </View>
+        </View>
+      </View> */}
+      <View className=" fx h-full flex-col justify-center">
         {dropList.map((item, index) => (
           <View
             key={item.title}
@@ -26,6 +36,11 @@ const DropList: FC<IPros> = (props) => {
               index < dropList.length - 1 ? 'mb-5' : ''
             }`}
             style={{ backgroundColor: item.backgroundColor }}
+            onClick={() =>
+              Taro.navigateTo({
+                url: item.url,
+              })
+            }
           >
             <View className="fx flex-row items-center">
               <Image
