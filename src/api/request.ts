@@ -37,6 +37,11 @@ class httpRequest {
     return this.baseOptions(option, 'PUT')
   }
 
+  patch(url, data ) {
+    const params = { url, data }
+    return this.baseOptions(params, 'PATCH')
+  }
+
   delete(url, data = '') {
     const option = { url, data }
     return this.baseOptions(option, 'DELETE')

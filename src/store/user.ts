@@ -2,10 +2,12 @@ import { makeAutoObservable, runInAction } from 'mobx'
 import type { userType } from '@/modules/user'
 import { getToken, setToken } from '@/utils/auth'
 import Taro from '@tarojs/taro'
-import { check, getUserInfo, login } from '../api/modules/user'
+import { check, getUserInfo, login, patchUser } from '../api/modules/user'
 import { removeToken } from '../utils/auth'
+import { Notify } from '@taroify/core'
+import { Toast } from '@/utils/toast'
 
-interface LoginType {
+export interface LoginType {
   avatarUrl: string
   nickName: string
 }
@@ -18,11 +20,11 @@ export default class UserStore {
     this.userInfoByToken()
   }
 
-  async getUserInfo() {
+  async getUserInfo(isLogin = true) {
     Taro.getUserProfile({
       desc: '获取用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: async (res) => {
-        await this.login(res.userInfo)
+        isLogin ? await this.login(res.userInfo) : await patchUser(res.userInfo)
       },
     })
   }
@@ -37,6 +39,7 @@ export default class UserStore {
         })
         setToken(userData.token)
         this.userInfoByToken()
+        Toast.success('登录成功')
       }
     })
   }

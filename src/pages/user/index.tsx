@@ -3,17 +3,17 @@ import { observer } from 'mobx-react-lite'
 import UserDetail from '@/components/in-page/user/user-detail'
 import UserList from '@/components/in-page/user/user-list'
 import UserPublish from '@/components/in-page/user/user-publish'
-import { View } from '@tarojs/components'
-
+import ContentLayout from '@/components/layouts/BasicLayout'
+import { useStore } from '@/store'
 
 const User = () => {
-
+  const { userStore } = useStore()
   return (
-    <View>
+    <ContentLayout>
       <UserDetail />
-      <UserPublish />
+      {userStore.isLogin() ? <UserPublish /> : null}
       <UserList />
-    </View>
+    </ContentLayout>
   )
 }
 

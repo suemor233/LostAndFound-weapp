@@ -1,6 +1,6 @@
 
 export default {
-  pages: ["pages/dynamic/index","pages/publish/index","pages/user/index",],
+  pages: ["pages/publish/index","pages/user/index","pages/dynamic/index"],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#FFE33F",
@@ -8,7 +8,6 @@ export default {
     navigationBarTextStyle: "black",
   },
   tabBar: {
-    custom: true,
     color: '#ADADAD',
     selectedColor: '#ecca0a',
     backgroundColor: '#ffffff',

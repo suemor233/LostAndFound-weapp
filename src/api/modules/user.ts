@@ -1,7 +1,8 @@
 
+import type { LoginType } from "@/store/user"
 import client from "../request"
 
-interface IUser  {
+export interface IUser  {
   id: string
   avatarUrl: string
   nickName:string
@@ -13,6 +14,10 @@ export function login(data:IUser) {
 
 export function getUserInfo() {
   return client.get('/user')
+}
+
+export function patchUser(data: LoginType) {
+  return client.patch('/user', data )
 }
 
 
