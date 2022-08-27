@@ -1,10 +1,11 @@
-import { Text, View } from '@tarojs/components'
+import LostForm from '@/components/in-page/publish/lost'
+import ContentLayout  from '@/components/layouts/BasicLayout';
 
 const Lost = () => {
   return (
-    <View>
-      <Text>丢失</Text>
-    </View>
+    <ContentLayout>
+        <LostForm/>
+    </ContentLayout>
   )
 }
 

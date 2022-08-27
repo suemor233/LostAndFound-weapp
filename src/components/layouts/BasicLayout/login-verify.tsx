@@ -7,7 +7,7 @@ import { useStore } from '@/store'
 const Loginverify: FC<PropsWithChildren> = ({ children }) => {
   const { userStore } = useStore()
   useDidShow(async() => {
-      if (!userStore.checkToken()) {
+      if (!await userStore.checkToken()) {
         Taro.switchTab({
           url: '/pages/user/index',
         })

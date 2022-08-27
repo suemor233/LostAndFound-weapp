@@ -55,9 +55,7 @@ const DropList: FC<IPros> = (props) => {
                 </Text>
               </View>
             </View>
-            <View className="fx items-center">
               <Choice />
-            </View>
           </View>
         ))}
       </View>

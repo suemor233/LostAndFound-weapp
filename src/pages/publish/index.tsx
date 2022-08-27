@@ -14,7 +14,6 @@ import styles from './index.module.css'
 
 const Publish = () => {
   const [open, setOpen] = useState(false)
-  const { userStore } = useStore()
   useDidShow(() => {
     setOpen(true)
   })
