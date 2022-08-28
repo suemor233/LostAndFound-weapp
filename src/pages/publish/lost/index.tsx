@@ -1,10 +1,10 @@
 import LostForm from '@/components/in-page/publish/lost'
-import ContentLayout  from '@/components/layouts/BasicLayout';
+import ContentLayout from '@/components/layouts/BasicLayout'
 
 const Lost = () => {
   return (
     <ContentLayout>
-        <LostForm/>
+        <LostForm />
     </ContentLayout>
   )
 }

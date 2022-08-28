@@ -1,4 +1,4 @@
-import type { PropsWithChildren, FC } from 'react';
+import type { FC, PropsWithChildren } from 'react'
 
 import Choice from '@/components/universal/Choice'
 import { Form, Input, Popup } from '@taroify/core'
@@ -10,7 +10,8 @@ interface IProps extends PropsWithChildren {
   placeholder?: string
   open: boolean
   onChange: (opened: boolean) => void
-  itemRef: React.MutableRefObject<FormItemInstance | undefined>
+  inputValue?: (opened: any) => string
+  itemRef?: React.MutableRefObject<FormItemInstance | undefined>
 }
 
 const PopupForm: FC<IProps> = ({
@@ -20,18 +21,30 @@ const PopupForm: FC<IProps> = ({
   title,
   children,
   itemRef,
+  inputValue,
   onChange,
 }) => {
   return (
     <>
-      <Form.Item ref={itemRef} name={formName} clickable rightIcon={<Choice />}>
+      <Form.Item ref={itemRef as any} name={formName} clickable rightIcon={<Choice />}>
         <Form.Label>{title}</Form.Label>
         <Form.Control>
-          <Input
-            readonly
-            placeholder={placeholder}
-            onClick={() => onChange(true)}
-          />
+          {inputValue ? (
+            (controller) => (
+              <Input
+                value={inputValue?.(controller.value)}
+                readonly
+                placeholder={placeholder}
+                onClick={() => onChange(true)}
+              />
+            )
+          ) : (
+            <Input
+              readonly
+              placeholder={placeholder}
+              onClick={() => onChange(true)}
+            />
+          )}
         </Form.Control>
       </Form.Item>
       <Popup

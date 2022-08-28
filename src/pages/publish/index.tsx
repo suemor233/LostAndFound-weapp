@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import DropList from '@/components/in-page/publish'
 import ContentLayout from '@/components/layouts/BasicLayout'
-import Loginverify from '@/components/layouts/BasicLayout/login-verify'
+import LoginAuth from '@/components/layouts/BasicLayout/login-verify'
 import { Backdrop, Popup } from '@taroify/core'
 import { useDidHide, useDidShow } from '@tarojs/taro'
 
@@ -19,7 +19,7 @@ const Publish = () => {
 
   return (
     <ContentLayout>
-      <Loginverify>
+      <LoginAuth>
         <Popup
           open={open}
           placement="bottom"
@@ -29,7 +29,7 @@ const Publish = () => {
           <Backdrop open={true} />
           <DropList open />
         </Popup>
-      </Loginverify>
+      </LoginAuth>
     </ContentLayout>
   )
 }

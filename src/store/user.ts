@@ -2,11 +2,11 @@ import { makeAutoObservable, runInAction } from 'mobx'
 
 import type { userType } from '@/modules/user'
 import { getToken, setToken } from '@/utils/auth'
-import { Toast } from '@/utils/toast'
 import Taro from '@tarojs/taro'
 
 import { check, getUserInfo, login, patchUser } from '../api/modules/user'
 import { removeToken } from '../utils/auth'
+import { Toast } from '@taroify/core'
 
 export interface LoginType {
   avatarUrl: string
@@ -68,5 +68,5 @@ export default class UserStore {
   isLogin() {
     return !!this.user
   }
-  
+
 }

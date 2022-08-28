@@ -1,6 +1,6 @@
 
 export default {
-  pages: ["pages/publish/index","pages/publish/lost/index","pages/publish/seek/index","pages/user/index","pages/dynamic/index"],
+  pages: ["pages/dynamic/index","pages/publish/lost/index","pages/publish/index","pages/publish/seek/index","pages/user/index",],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#FFE33F",

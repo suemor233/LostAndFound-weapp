@@ -1,10 +1,11 @@
 import { Text, View } from '@tarojs/components'
+import  ContentLayout  from '@/components/layouts/BasicLayout';
 
 const Dynamic = () => {
   return (
-    <View>
+    <ContentLayout>
       <Text>动态</Text>
-    </View>
+    </ContentLayout>
   )
 }
 

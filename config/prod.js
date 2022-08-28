@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     NODE_ENV: '"production"',
-    API_URL: JSON.stringify('https://wx.suemor.com/api/v2')
+    API_URL: JSON.stringify('http://127.0.0.1:2349')
   },
   defineConstants: {},
   mini: {},
