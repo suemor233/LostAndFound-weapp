@@ -1,10 +1,18 @@
-import { Text } from '@tarojs/components'
-import  ContentLayout  from '@/components/layouts/BasicLayout';
+import SearchBar from '@/components/in-page/dynamic/search'
+import ContentLayout from '@/components/layouts/BasicLayout'
+import { View } from '@tarojs/components'
+
+import SwiperView from '../../components/in-page/dynamic/swiper-view'
+import TagsListView from '@/components/in-page/dynamic/tags-list-view';
 
 const Dynamic = () => {
   return (
     <ContentLayout>
-      <Text>动态</Text>
+      <SearchBar />
+      <View className='m-1'>
+        <SwiperView />
+        <TagsListView/>
+      </View>
     </ContentLayout>
   )
 }

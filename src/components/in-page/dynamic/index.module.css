@@ -1,0 +1,47 @@
+.image-swiper {
+  position: relative;
+  border-radius: 2%;
+  &-wrapper {
+    position: relative;
+    &-image {
+      box-sizing: border-box;
+      width: 100%;
+      height: 240px * 2;
+      padding: 30px * 2 60px * 2;
+      background: #fff;
+      pointer-events: none;
+    }
+
+    &-text {
+      position: absolute;
+      color: white;
+      font-size: 40px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 50px 20px;
+      background: rgba(0, 0, 0, 0.5);
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.tagsButton {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 12px 30px;
+  border-radius: 36px;
+  background-color: white;
+  transition: all 0.1s ease;
+  border: none;
+}
+.tagsButton::after {
+  border: none;
+}
+.selected {
+  background-color: var(--primary);
+}

@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react'
 
 import { PATH } from '@/constants/path'
-import { Toast as myToast } from '@/utils/toast'
 import { Toast } from '@taroify/core'
 import type { BaseEventOrig, FormProps } from '@tarojs/components'
 import { View } from '@tarojs/components'

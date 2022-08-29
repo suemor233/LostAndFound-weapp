@@ -22,7 +22,7 @@ class httpRequest {
     return Taro.request(option).then((res) => res.data)
   }
 
-  get(url, data = '') {
+  get(url, data?) {
     const option = { url, data }
     return this.baseOptions(option)
   }
