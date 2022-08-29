@@ -4,9 +4,10 @@ import type { userType } from '@/modules/user'
 import { getToken, setToken } from '@/utils/auth'
 import Taro from '@tarojs/taro'
 
-import { check, getUserInfo, login, patchUser } from '../api/modules/user'
+import { check, login, patchUser } from '../api/modules/user'
 import { removeToken } from '../utils/auth'
 import { Toast } from '@taroify/core'
+import { aggregateInfo } from '../api/modules/aggregate';
 
 export interface LoginType {
   avatarUrl: string
@@ -46,7 +47,7 @@ export default class UserStore {
   }
 
   async userInfoByToken() {
-    const res: userType = await getUserInfo()
+    const res: userType = await aggregateInfo()
     if (res) {
       runInAction(() => {
         this.user = res

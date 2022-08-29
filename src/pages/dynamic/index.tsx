@@ -1,4 +1,4 @@
-import { Text, View } from '@tarojs/components'
+import { Text } from '@tarojs/components'
 import  ContentLayout  from '@/components/layouts/BasicLayout';
 
 const Dynamic = () => {

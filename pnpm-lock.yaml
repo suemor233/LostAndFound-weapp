@@ -30,11 +30,13 @@ specifiers:
   '@typescript-eslint/parser': ^5.20.0
   babel-plugin-import: ^1.13.5
   babel-preset-taro: 3.5.4
+  date-fns: ^2.29.2
   eslint: ^8.12.0
   eslint-config-taro: 3.5.4
   eslint-plugin-import: ^2.12.0
   eslint-plugin-react: ^7.8.2
   eslint-plugin-react-hooks: ^4.2.0
+  lodash-es: ^4.17.21
   mobx: ^6.6.1
   mobx-react: ^7.5.2
   mobx-react-lite: ^3.4.0
@@ -69,6 +71,8 @@ dependencies:
   '@tarojs/shared': 3.5.4
   '@tarojs/taro': 3.5.4_@types+react@18.0.17
   '@tarojs/taro-h5': 3.5.4_@types+react@18.0.17
+  date-fns: 2.29.2
+  lodash-es: 4.17.21
   mobx: 6.6.1
   mobx-react: 7.5.2_m26jawr67gnusmh4egzqtnhxru
   mobx-react-lite: 3.4.0_m26jawr67gnusmh4egzqtnhxru
@@ -5411,6 +5415,11 @@ packages:
       whatwg-mimetype: 2.3.0
       whatwg-url: 7.1.0
     dev: true
+
+  /date-fns/2.29.2:
+    resolution: {integrity: sha512-0VNbwmWJDS/G3ySwFSJA3ayhbURMTJLtwM2DTxf9CWondCnh6DTNlO9JgRSq6ibf4eD0lfMJNBxUdEAHHix+bA==}
+    engines: {node: '>=0.11'}
+    dev: false
 
   /de-indent/1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}

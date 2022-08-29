@@ -22,12 +22,22 @@ interface LostSeekFormProps {
   titlePlaceholder: string
   timeLabel: string
   otherLabel: string
-  formName:string
-  onSubmit?:(event: BaseEventOrig<FormProps.onSubmitEventDetail>)=>void
+  formName: string
+  disabled: boolean
+  onSubmit?: (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => void
 }
 
 const LostSeekForm: FC<LostSeekFormProps> = (props) => {
-  const { titlePlaceholder, timeLabel,formName, otherLabel,onSubmit } = props
+  const {
+    titlePlaceholder,
+    timeLabel,
+    formName,
+    otherLabel,
+    onSubmit,
+    disabled,
+  } = props
+
+
 
   return (
     <Form onSubmit={onSubmit}>
@@ -35,7 +45,7 @@ const LostSeekForm: FC<LostSeekFormProps> = (props) => {
         <Form.Item name="title">
           <Form.Label>标题</Form.Label>
           <Form.Control>
-            <Input placeholder={titlePlaceholder}/>
+            <Input placeholder={titlePlaceholder} />
           </Form.Control>
         </Form.Item>
 
@@ -59,16 +69,19 @@ const LostSeekForm: FC<LostSeekFormProps> = (props) => {
 
         <Form.Item name="detail">
           <Form.Control>
-            <Textarea
-              style={{ height: '100px' }}
-              placeholder={otherLabel}
-            />
+            <Textarea style={{ height: '100px' }} placeholder={otherLabel} />
           </Form.Control>
         </Form.Item>
         {/* <UploaderField /> */}
       </Cell.Group>
       <View style={{ margin: '16px' }}>
-        <Button shape="round" block style={{'backgroundColor': 'var(--primary)'}} formType="submit">
+        <Button
+          shape="round"
+          block
+          style={{ backgroundColor: 'var(--primary)' }}
+          formType="submit"
+          disabled={disabled}
+        >
           提交
         </Button>
       </View>
@@ -81,6 +94,7 @@ interface IProps extends PropsWithChildren {
   formName: string
   title?: string
   placeholder?: string
+  newValue?: (value: any) => void
 }
 
 export const CategoryForm: FC<IProps> = (props) => {
@@ -100,6 +114,7 @@ export const CategoryForm: FC<IProps> = (props) => {
       <Picker
         onCancel={() => setOpen(false)}
         onConfirm={(newValue) => {
+          props.newValue?.(newValue[0])
           itemRef.current?.setValue(newValue[0])
           setOpen(false)
         }}
@@ -150,6 +165,7 @@ export const DatetimePickerForm: FC<Omit<IProps, 'list'>> = (props) => {
         defaultValue={defaultValue}
         onCancel={() => setOpen(false)}
         onConfirm={(newValue) => {
+          props.newValue?.(newValue)
           itemRef.current?.setValue(newValue)
           setOpen(false)
         }}
