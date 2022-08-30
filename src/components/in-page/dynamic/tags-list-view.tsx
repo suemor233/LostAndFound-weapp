@@ -1,44 +1,46 @@
-import { useCallback, useState } from 'react'
-
-import { lostFoundList } from '@/api/modules/aggregate'
-import { FoundDatum, LostDatum, lostFoundType } from '@/modules/lost-page'
-import { Grid, Image, List, Loading } from '@taroify/core'
+import { observer } from 'mobx-react-lite'
+import type { FC} from 'react';
+import { memo , useCallback, useLayoutEffect, useRef, useState } from 'react'
+import type { FoundDatum, LostDatum } from '@/modules/lost-page'
+import { useStore } from '@/store'
+import { Image, List, Loading, Tag } from '@taroify/core'
 import { Button, Text, View } from '@tarojs/components'
 import { usePageScroll } from '@tarojs/taro'
 
 import styles from './index.module.css'
 
 const TagsListView = () => {
+  const [selectedTab, setSelectedTab] = useState('list')
   return (
     <View className="mt-3">
-      <TagsView />
+      <TagsView onChangeTab={(tab) => setSelectedTab(tab)} />
       <View className="mt-3">
-        <ListView />
+        <ListView selectedTab={selectedTab} />
       </View>
     </View>
   )
 }
 
-type tabsType = Array<[string, boolean]>
+type tabsType = Array<[string, string, boolean]>
 
-const TagsView = () => {
+const TagsView: FC<{ onChangeTab?: (name: string) => void }> = (props) => {
   const [tabs, setTabs] = useState<tabsType>([
-    ['全部', true],
-    ['最新发布', false],
-    ['只看失物', false],
-    ['只看寻物', false],
+    ['猜你想要', 'list', true],
+    ['最新发布', 'last', false],
+    ['只看失物', 'lost', false],
+    ['只看寻物', 'found', false],
   ])
-
   const handleSelecated = useCallback(
-    (e: React.MouseEvent, tab: [string, boolean]) => {
+    (e: React.MouseEvent, tab: [string, string, boolean]) => {
       setTabs(
         tabs.map((item) => {
           if (item[0] === tab[0]) {
-            return [item[0], true]
+            return [item[0], item[1], true]
           }
-          return [item[0], false]
+          return [item[0], item[1], false]
         }),
       )
+      props.onChangeTab?.(tab[1])
     },
     [tabs],
   )
@@ -49,7 +51,7 @@ const TagsView = () => {
         return (
           <Button
             onClick={(e: any) => handleSelecated(e, key)}
-            className={`${styles.tagsButton} ${key[1] ? styles.selected : ''}`}
+            className={`${styles.tagsButton} ${key[2] ? styles.selected : ''}`}
             key={key[0]}
           >
             {key[0]}
@@ -60,71 +62,80 @@ const TagsView = () => {
   )
 }
 
-const ListView = () => {
-  const [hasMore, setHasMore] = useState(true)
-  const [lost, setLost] = useState<LostDatum[]>([])
-  const [found, setFound] = useState<FoundDatum[]>([])
+const ListView: FC<{ selectedTab: string }> = observer((props) => {
   const [loading, setLoading] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
-  const [pageCurrent, setPageCurrent] = useState(1)
-  usePageScroll(({ scrollTop: aScrollTop }) => setScrollTop(aScrollTop))
+  const firstUpdate = useRef(true)
+  const { lostFoundStore } = useStore()
+  usePageScroll(({ scrollTop: aScrollTop }) => {
+    setScrollTop(aScrollTop)
+  })
+
+
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false
+      return
+    } else {
+      lostFoundStore.reset()
+      onLoad()
+    }
+  }, [props.selectedTab])
 
   const onLoad = async () => {
     setLoading(true)
-
-    const res = (await lostFoundList({
-      pageCurrent,
-      pageSize: 10,
-    })) as lostFoundType
-
-    setLost((current) => [...current, ...res.lostFound[0].lostData])
-    setFound((current) => [...current, ...res.lostFound[1].foundData])
-    setPageCurrent((current) => current + 1)
-    setHasMore(!!res.totalCount)
+    await lostFoundStore.getLostFoundList(props.selectedTab)
     setLoading(false)
-
-    console.log(lost,found);
-
-    // setTimeout(() => {
-    //   for (let i = 0; i < 10; i++) {
-    //     const text = list.length + 1
-    //     list.push(text < 10 ? `0${text}` : String(text))
-    //   }
-    //   setList([...list])
-    //
-    //
-    // }, 1000)
   }
   return (
     <List
       loading={loading}
-      hasMore={hasMore}
+      hasMore={lostFoundStore.hasMore}
       scrollTop={scrollTop}
       onLoad={onLoad}
     >
-      <Grid columns={2} bordered={false}>
-        {lost.map((item) => (
-          <Grid.Item key={item.id}>
-            <ListItem />
-          </Grid.Item>
+      <View className={styles['grid-masonry']}>
+        {lostFoundStore.lost.map((item) => (
+          <ListItem item={item} key={item.id} />
         ))}
 
-        {found.map((item) => (
-          <Grid.Item key={item.id}>
-            <ListItem />
-          </Grid.Item>
+        {lostFoundStore.found.map((item) => (
+          <ListItem item={item} key={item.id} />
         ))}
-      </Grid>
+      </View>
       <List.Placeholder>
         {loading && <Loading>加载中...</Loading>}
-        {!hasMore && '没有更多了'}
+        {!lostFoundStore.hasMore && '没有更多了'}
       </List.Placeholder>
     </List>
   )
-}
+})
 
-const ListItem = () => {
-  return <Text className="h-24">我是每一项</Text>
-}
+const ListItem: FC<{ item: LostDatum | FoundDatum }> = memo((props) => {
+  const { item } = props
+  return (
+    <View className="w-full rounded-md bg-white shadow-md  whitespace-nowrap">
+      <Image
+        src={item.image}
+        style={{ width: '100%', height: '200px' }}
+        mode="aspectFill"
+        className="rounded-t-md"
+        placeholder="加载中..."
+      />
+      <View className="p-2 fx">
+        <Tag
+          color="info"
+          shape="rounded"
+          style={{ borderRadius: '10%', padding: '3px' }}
+        >
+          {item.category}
+        </Tag>
+        <Text className="text-base ml-2 overflow-ellipsis overflow-hidden ">
+          {item.title}
+        </Text>
+      </View>
+    </View>
+  )
+})
 
 export default TagsListView

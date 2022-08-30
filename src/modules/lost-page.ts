@@ -3,7 +3,7 @@ export interface lostFoundType {
   totalCount: number;
 }
 
-interface LostFound {
+export interface LostFound {
   lostData: LostDatum[];
   lengthCurrent: number;
   pageCurrent: number;
@@ -21,6 +21,7 @@ export interface FoundDatum {
   category: string;
   foundTime: string;
   detail: string;
+  image: string;
   state: boolean;
   created: string;
   updated: string;
@@ -35,6 +36,7 @@ export interface LostDatum {
   category: string;
   lostTime: string;
   detail: string;
+  image: string;
   created: string;
   updated: string;
 }

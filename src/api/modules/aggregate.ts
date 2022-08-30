@@ -12,3 +12,7 @@ export function aggregateInfo() {
 export function lostFoundList(params: PageType) {
   return client.get('/aggregate/list',  params )
 }
+
+export function lostFoundListByUrl(url:string,params: PageType) {
+  return client.get(`/aggregate/${url}`,  params )
+}
