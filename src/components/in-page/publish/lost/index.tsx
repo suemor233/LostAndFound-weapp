@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react'
 import type { ILost } from '@/api/modules/lost'
 import { createLost } from '@/api/modules/lost'
 import { PATH } from '@/constants/path'
+import { getToken } from '@/utils'
 import { Toast } from '@taroify/core'
 import type { BaseEventOrig, FormProps } from '@tarojs/components'
 import { View } from '@tarojs/components'
@@ -15,9 +16,22 @@ const LostForm = () => {
   const onSubmit = useCallback(
     async (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
       const value = event.detail.value as ILost
+      const { id } = await createLost(value)
+      value.image.forEach((item) => {
+        Taro.uploadFile({
+          url: `${process.env.API_URL}/lost/upload`,
+          filePath: item.url,
+          name: 'file',
+          formData: {
+            id
+          },
+          header: {
+            Authorization: `Bearer ${getToken()}`,
+          }
+        })
+      })
 
-      const res = await createLost(value)
-      if (res) {
+      if (id) {
         setDisabled(true)
         Toast.success({
           message: '创建成功,正在为您跳转到首页',

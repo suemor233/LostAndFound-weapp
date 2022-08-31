@@ -37,8 +37,6 @@ const LostSeekForm: FC<LostSeekFormProps> = (props) => {
     disabled,
   } = props
 
-
-
   return (
     <Form onSubmit={onSubmit}>
       <Cell.Group inset>
@@ -72,7 +70,7 @@ const LostSeekForm: FC<LostSeekFormProps> = (props) => {
             <Textarea style={{ height: '100px' }} placeholder={otherLabel} />
           </Form.Control>
         </Form.Item>
-        {/* <UploaderField /> */}
+        <UploaderField />
       </Cell.Group>
       <View style={{ margin: '16px' }}>
         <Button
@@ -184,28 +182,31 @@ export const UploaderField = () => {
 
   const onUpload = () => {
     Taro.chooseImage({
-      count: 1,
+      count: 5,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
     }).then(({ tempFiles }) => {
-      itemRef.current?.setValue([
-        ...(itemRef.current?.getValue()
-          ? [...(itemRef.current?.getValue() as any)]
-          : []),
-        {
-          url: tempFiles[0].path,
-          type: tempFiles[0].type,
-          name: tempFiles[0].originalFileObj?.name,
-        },
-      ])
+      tempFiles.forEach(item => {
+        itemRef.current?.setValue([
+          ...(itemRef.current?.getValue()
+            ? [...(itemRef.current?.getValue() as any)]
+            : []),
+          {
+            url: item.path,
+            type: item.type,
+            name: item.originalFileObj?.name,
+          },
+        ])
+      })
+
     })
   }
 
   return (
-    <Form.Item ref={itemRef as any} name="uploader">
+    <Form.Item ref={itemRef as any} name="image">
       <Form.Label>上传图片</Form.Label>
       <Form.Control>
-        <Uploader multiple={true} maxFiles={4} onUpload={onUpload} />
+        <Uploader value={itemRef.current?.getValue()} multiple={true} maxFiles={5} onUpload={onUpload} />
       </Form.Control>
     </Form.Item>
   )

@@ -1,20 +1,28 @@
 import { observer } from 'mobx-react-lite'
-import type { FC} from 'react';
-import { memo , useCallback, useLayoutEffect, useRef, useState } from 'react'
+import type { FC } from 'react'
+import { memo, useCallback, useLayoutEffect, useRef, useState } from 'react'
+
 import type { FoundDatum, LostDatum } from '@/modules/lost-page'
 import { useStore } from '@/store'
-import { Image, List, Loading, Tag } from '@taroify/core'
+import { Image, List, Loading, Sticky, Tag } from '@taroify/core'
 import { Button, Text, View } from '@tarojs/components'
-import { usePageScroll } from '@tarojs/taro'
+import Taro, {
+  useDidShow,
+  usePageScroll,
+  usePullDownRefresh,
+} from '@tarojs/taro'
 
 import styles from './index.module.css'
 
 const TagsListView = () => {
   const [selectedTab, setSelectedTab] = useState('list')
+  const [fixed, setFix] = useState(false)
   return (
-    <View className="mt-3">
-      <TagsView onChangeTab={(tab) => setSelectedTab(tab)} />
-      <View className="mt-3">
+    <View>
+      <Sticky offsetTop="50" onChange={(fix) => setFix(fix)}>
+        <TagsView onChangeTab={(tab) => setSelectedTab(tab)} fixed={fixed} />
+      </Sticky>
+      <View>
         <ListView selectedTab={selectedTab} />
       </View>
     </View>
@@ -23,7 +31,9 @@ const TagsListView = () => {
 
 type tabsType = Array<[string, string, boolean]>
 
-const TagsView: FC<{ onChangeTab?: (name: string) => void }> = (props) => {
+const TagsView: FC<{ onChangeTab?: (name: string) => void; fixed: boolean }> = (
+  props,
+) => {
   const [tabs, setTabs] = useState<tabsType>([
     ['猜你想要', 'list', true],
     ['最新发布', 'last', false],
@@ -46,7 +56,11 @@ const TagsView: FC<{ onChangeTab?: (name: string) => void }> = (props) => {
   )
 
   return (
-    <View className="fx gap-2">
+    <View
+      className={`fx gap-2 justify-center ${
+        props.fixed && 'bg-white'
+      } py-2 px-1`}
+    >
       {tabs.map((key) => {
         return (
           <Button
@@ -70,7 +84,16 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
   usePageScroll(({ scrollTop: aScrollTop }) => {
     setScrollTop(aScrollTop)
   })
+  usePullDownRefresh(async () => {
+    lostFoundStore.reset()
+    await onLoad()
+    Taro.stopPullDownRefresh()
+  })
 
+  useDidShow(() => {
+    lostFoundStore.reset()
+    onLoad()
+  })
 
   useLayoutEffect(() => {
     if (firstUpdate.current) {
@@ -116,7 +139,7 @@ const ListItem: FC<{ item: LostDatum | FoundDatum }> = memo((props) => {
   return (
     <View className="w-full rounded-md bg-white shadow-md  whitespace-nowrap">
       <Image
-        src={item.image}
+        src={item.image[0] || 'https://y.suemor.com/imagesstudent-card.jpg'}
         style={{ width: '100%', height: '200px' }}
         mode="aspectFill"
         className="rounded-t-md"

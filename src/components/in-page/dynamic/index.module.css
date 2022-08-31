@@ -38,6 +38,7 @@
   background-color: white;
   transition: all 0.1s ease;
   border: none;
+  font-size: 28px;
 }
 .tagsButton::after {
   border: none;

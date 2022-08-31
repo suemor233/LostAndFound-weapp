@@ -8,6 +8,12 @@ export default class LostFoundStore {
   found: FoundDatum[] = []
   pageCurrent = 1
   hasMore = true
+
+  radomSwiper = {
+    randomLostFound: [] as (LostDatum | FoundDatum)[],
+    radomFlag: true,
+  }
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -25,9 +31,35 @@ export default class LostFoundStore {
 
     this.hasMore = !!res.totalCount
     this.pageCurrent++
+    this.radomSwiper.radomFlag && this.randomLostFoundList(6)
+    this.radomSwiper.radomFlag = false
   }
 
-  async reset () {
+  async randomLostFoundList(num: number) {
+    const _num = num / 2
+    const resultLost = [] as LostDatum[]
+    const resultFound = [] as FoundDatum[]
+
+    let lostCount = this.lost.length
+    let foundCount = this.found.length
+
+    for (let i = 0; i < _num; i++) {
+      const index = ~~(Math.random() * lostCount) + i
+      resultLost[i] = this.lost[index]
+      this.lost[index] = this.lost[i]
+      lostCount--
+    }
+
+    for (let i = 0; i < _num; i++) {
+      const index = ~~(Math.random() * foundCount) + i
+      resultFound[i] = this.found[index]
+      this.found[index] = this.found[i]
+      foundCount--
+    }
+    this.radomSwiper.randomLostFound = [...resultLost, ...resultFound]
+  }
+
+  async reset() {
     this.lost = []
     this.found = []
     this.pageCurrent = 1

@@ -9,6 +9,7 @@ import Taro from '@tarojs/taro'
 import type { IFound } from '../../../../api/modules/found'
 import { createFound } from '../../../../api/modules/found'
 import LostSeekForm from '../lost-seek-form'
+import { getToken } from '@/utils'
 
 const SeekForm = () => {
   const [disabled, setDisabled] = useState(false)
@@ -16,8 +17,21 @@ const SeekForm = () => {
     async (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => {
       const value = event.detail.value as IFound
 
-      const res = await createFound(value)
-      if (res) {
+      const { id } = await createFound(value)
+       value.image.forEach(async(item) => {
+        await Taro.uploadFile({
+          url: `${process.env.API_URL}/found/upload`,
+          filePath: item.url,
+          name: 'file',
+          formData: {
+            id
+          },
+          header: {
+            Authorization: `Bearer ${getToken()}`,
+          }
+        })
+      })
+      if (id) {
         setDisabled(true)
         Toast.success({
           message: '创建成功,正在为您跳转到首页',
@@ -28,7 +42,7 @@ const SeekForm = () => {
           },
           duration: 1500,
         })
-      } 
+      }
     },
     [],
   )

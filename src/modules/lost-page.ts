@@ -36,7 +36,7 @@ export interface LostDatum {
   category: string;
   lostTime: string;
   detail: string;
-  image: string;
+  image: string[];
   created: string;
   updated: string;
 }

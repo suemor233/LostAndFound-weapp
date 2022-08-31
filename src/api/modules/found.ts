@@ -1,5 +1,6 @@
 
 import client from "../request"
+import type { ImageFile } from "./lost"
 
 export interface IFound  {
   title: string
@@ -7,6 +8,7 @@ export interface IFound  {
   category:string
   foundTime:Date
   detail:string
+  image:ImageFile[]
 }
 
 export function createFound(data:IFound) {
