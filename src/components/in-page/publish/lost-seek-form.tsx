@@ -183,22 +183,22 @@ export const UploaderField = () => {
   const onUpload = () => {
     Taro.chooseImage({
       count: 5,
-      sizeType: ['original', 'compressed'],
+      sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
     }).then(({ tempFiles }) => {
-      tempFiles.forEach(item => {
+      tempFiles.forEach((item, index) => {
         itemRef.current?.setValue([
           ...(itemRef.current?.getValue()
             ? [...(itemRef.current?.getValue() as any)]
             : []),
           {
+            cover: !index,
             url: item.path,
             type: item.type,
             name: item.originalFileObj?.name,
           },
         ])
       })
-
     })
   }
 
@@ -206,7 +206,12 @@ export const UploaderField = () => {
     <Form.Item ref={itemRef as any} name="image">
       <Form.Label>上传图片</Form.Label>
       <Form.Control>
-        <Uploader value={itemRef.current?.getValue()} multiple={true} maxFiles={5} onUpload={onUpload} />
+        <Uploader
+          value={itemRef.current?.getValue()}
+          multiple={true}
+          maxFiles={5}
+          onUpload={onUpload}
+        />
       </Form.Control>
     </Form.Item>
   )

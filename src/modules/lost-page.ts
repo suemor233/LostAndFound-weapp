@@ -22,6 +22,7 @@ export interface FoundDatum {
   foundTime: string;
   detail: string;
   image: string;
+  cover: string;
   state: boolean;
   created: string;
   updated: string;
@@ -33,6 +34,7 @@ export interface LostDatum {
   uid: string;
   title: string;
   contact: string;
+  cover: string;
   category: string;
   lostTime: string;
   detail: string;

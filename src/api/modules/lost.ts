@@ -19,10 +19,8 @@ export interface ImageFile {
    * @supported h5
    */
   type?: string
-  /** 原始的浏览器 File 对象
-   * @supported h5
-   */
-  originalFileObj?: File
+
+  cover:boolean
 }
 
 export function createLost(data:ILost) {

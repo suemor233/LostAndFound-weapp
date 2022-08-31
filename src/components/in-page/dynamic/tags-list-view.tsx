@@ -90,6 +90,7 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
     Taro.stopPullDownRefresh()
   })
 
+  // FIXME: 这里会触发两次
   useDidShow(() => {
     lostFoundStore.reset()
     onLoad()
@@ -139,7 +140,7 @@ const ListItem: FC<{ item: LostDatum | FoundDatum }> = memo((props) => {
   return (
     <View className="w-full rounded-md bg-white shadow-md  whitespace-nowrap">
       <Image
-        src={item.image[0] || 'https://y.suemor.com/imagesstudent-card.jpg'}
+        src={item.cover|| 'https://y.suemor.com/imagesstudent-card.jpg'}
         style={{ width: '100%', height: '200px' }}
         mode="aspectFill"
         className="rounded-t-md"
