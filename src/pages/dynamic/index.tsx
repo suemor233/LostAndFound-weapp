@@ -4,6 +4,8 @@ import { View } from '@tarojs/components'
 
 import SwiperView from '../../components/in-page/dynamic/swiper-view'
 import TagsListView from '@/components/in-page/dynamic/tags-list-view';
+import { useDidShow } from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 
 const Dynamic = () => {
 

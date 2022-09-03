@@ -24,7 +24,7 @@ const Publish = () => {
           open={open}
           placement="bottom"
           rounded
-          style={{ height: '60%', backgroundColor: '#f7f7f7' }}
+          style={{ height: '80%', backgroundColor: '#f7f7f7' }}
         >
           <Backdrop open={true} />
           <DropList open />

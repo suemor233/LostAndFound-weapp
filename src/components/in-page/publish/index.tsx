@@ -14,7 +14,7 @@ interface IPros {
 // Todo suggest refactor becaouse of component flashing
 const DropList: FC<IPros> = (props) => {
   return (
-    <View className="h-full relative px-5 py-1 mt-5">
+    <View className="h-full relative px-5 py-1 mt-10">
       {/* <View className="absolute w-full">
         <View className="w-full fx justifbe">
           <View className="fx flex-col ">

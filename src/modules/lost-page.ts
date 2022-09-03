@@ -1,6 +1,10 @@
+import { userType } from "./user";
+
 export interface lostFoundType {
   lostFound: LostFound[];
   totalCount: number;
+  lost:LostFound
+  found:LostFound
 }
 
 export interface LostFound {
@@ -23,6 +27,7 @@ export interface FoundDatum {
   detail: string;
   image: string;
   cover: string;
+  user:userType;
   state: boolean;
   created: string;
   updated: string;
@@ -39,6 +44,7 @@ export interface LostDatum {
   lostTime: string;
   detail: string;
   image: string[];
+  user:userType
   created: string;
   updated: string;
 }

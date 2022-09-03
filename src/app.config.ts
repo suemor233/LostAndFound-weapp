@@ -1,6 +1,6 @@
 
 export default {
-  pages: ["pages/dynamic/index","pages/publish/lost/index","pages/publish/index","pages/publish/seek/index","pages/user/index",],
+  pages: ["pages/dynamic/index","pages/publish/lost/index","pages/publish/index","pages/publish/seek/index","pages/user/index"],
   window: {
     backgroundTextStyle: "light",
     navigationBarBackgroundColor: "#FFE33F",
@@ -8,6 +8,7 @@ export default {
     navigationBarTextStyle: "black",
   },
   tabBar: {
+    custom: true,
     color: '#ADADAD',
     selectedColor: '#ecca0a',
     backgroundColor: '#ffffff',
@@ -20,8 +21,8 @@ export default {
       },
       {
         pagePath: 'pages/publish/index',
-        selectedIconPath: 'assets/img/publish_select.png',
-        iconPath: 'assets/img/publish.png',
+        selectedIconPath: 'assets/img/publish_new.png',
+        iconPath: 'assets/img/publish_new.png',
         text: '发布'
       },
       {

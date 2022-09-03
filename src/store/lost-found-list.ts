@@ -25,11 +25,16 @@ export default class LostFoundStore {
     })) as lostFoundType
 
     if (res) {
-      this.lost.push(...res.lostFound[0].lostData)
-      this.found.push(...res.lostFound[1].foundData)
+      if (res.lostFound) {
+        this.lost.push(...res.lostFound[0].lostData)
+        this.found.push(...res.lostFound[1].foundData)
+      } else if (res.lost) {
+        this.lost.push(...res.lost.lostData)
+      } else if (res.found) {
+        this.found.push(...res.found.foundData)
+      }
     }
 
-    this.hasMore = false
     this.hasMore = !!res.totalCount
     this.pageCurrent++
     if (this.lost.length > 0 && this.found.length > 0) {

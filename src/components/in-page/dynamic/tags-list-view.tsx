@@ -4,6 +4,7 @@ import { memo, useCallback, useLayoutEffect, useRef, useState } from 'react'
 
 import type { FoundDatum, LostDatum } from '@/modules/lost-page'
 import { useStore } from '@/store'
+import { getReFresh, removeReFresh } from '@/utils'
 import { Image, List, Loading, Sticky, Tag } from '@taroify/core'
 import { Button, Text, View } from '@tarojs/components'
 import Taro, {
@@ -15,7 +16,7 @@ import Taro, {
 import styles from './index.module.css'
 
 const TagsListView = () => {
-  const [selectedTab, setSelectedTab] = useState('list')
+  const [selectedTab, setSelectedTab] = useState('last')
   const [fixed, setFix] = useState(false)
   return (
     <View>
@@ -35,8 +36,8 @@ const TagsView: FC<{ onChangeTab?: (name: string) => void; fixed: boolean }> = (
   props,
 ) => {
   const [tabs, setTabs] = useState<tabsType>([
-    ['猜你想要', 'list', true],
-    ['最新发布', 'last', false],
+    ['最新发布', 'last', true],
+    ['最早发布', 'early', false],
     ['只看失物', 'lost', false],
     ['只看寻物', 'found', false],
   ])
@@ -56,11 +57,7 @@ const TagsView: FC<{ onChangeTab?: (name: string) => void; fixed: boolean }> = (
   )
 
   return (
-    <View
-      className={`fx gap-2 justify-center ${
-        props.fixed && 'bg-white'
-      } py-2 px-1`}
-    >
+    <View className={`fx ${props.fixed && 'bg-white'} py-2 px-1`}>
       {tabs.map((key) => {
         return (
           <Button
@@ -80,7 +77,7 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
   const [loading, setLoading] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
   const firstUpdate = useRef(true)
-  const { lostFoundStore } = useStore()
+  const { lostFoundStore, tabStore } = useStore()
   usePageScroll(({ scrollTop: aScrollTop }) => {
     setScrollTop(aScrollTop)
   })
@@ -92,8 +89,12 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
 
   // FIXME: 这里会触发两次
   useDidShow(() => {
-    lostFoundStore.reset()
-    onLoad()
+    if (getReFresh()) {
+      lostFoundStore.reset()
+      onLoad()
+      removeReFresh()
+      tabStore.updateTab(0)
+    }
   })
 
   useLayoutEffect(() => {
@@ -111,6 +112,7 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
     await lostFoundStore.getLostFoundList(props.selectedTab)
     setLoading(false)
   }
+
   return (
     <List
       loading={loading}
@@ -120,11 +122,11 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
     >
       <View className={styles['grid-masonry']}>
         {lostFoundStore.lost.map((item) => (
-          <ListItem item={item} key={item.id} />
+          <ListItem item={item} key={item.id} title={'失物'} />
         ))}
 
         {lostFoundStore.found.map((item) => (
-          <ListItem item={item} key={item.id} />
+          <ListItem item={item} key={item.id} title={'寻物'} />
         ))}
       </View>
       <List.Placeholder>
@@ -135,31 +137,53 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
   )
 })
 
-const ListItem: FC<{ item: LostDatum | FoundDatum }> = memo((props) => {
-  const { item } = props
-  return (
-    <View className="w-full rounded-md bg-white shadow-md  whitespace-nowrap">
-      <Image
-        src={item.cover|| 'https://y.suemor.com/imagesstudent-card.jpg'}
-        style={{ width: '100%', height: '200px' }}
-        mode="aspectFill"
-        className="rounded-t-md"
-        placeholder="加载中..."
-      />
-      <View className="p-2 fx">
-        <Tag
-          color="info"
-          shape="rounded"
-          style={{ borderRadius: '10%', padding: '3px' }}
-        >
-          {item.category}
-        </Tag>
-        <Text className="text-base ml-2 overflow-ellipsis overflow-hidden ">
-          {item.title}
-        </Text>
+const ListItem: FC<{ item: LostDatum | FoundDatum; title: string }> = memo(
+  (props) => {
+    const { item, title } = props
+    return (
+      <View className="w-full rounded-md bg-white shadow-md whitespace-nowrap">
+        <Image
+          src={item.cover}
+          style={{ width: '100%', height: '200px' }}
+          mode="aspectFill"
+          className="rounded-t-md"
+          placeholder="加载中..."
+        />
+        <View className="fx flex-col p-2 gap-2">
+          <View className="fx">
+            <Tag
+              color="info"
+              shape="rounded"
+              style={{ borderRadius: '10%', padding: '0px 5px' }}
+            >
+              {title}
+            </Tag>
+            <Text className="text-base ml-2 overflow-ellipsis overflow-hidden ">
+              {item.title}
+            </Text>
+          </View>
+          <View className="fx justify-between">
+            <View className="fx">
+              <Image
+                src={item.user.avatarUrl}
+                style={{ width: '25px', height: '25px' }}
+                className="rounded-t-md"
+                shape={'circle'}
+              />
+              <View>
+                <Text className="text-gray-400 text-sm ml-1">
+                  {item.user.nickName}
+                </Text>
+              </View>
+            </View>
+            <Text className={`${styles.tagsCategory} border-opacity-10`}>
+              {item.category}
+            </Text>
+          </View>
+        </View>
       </View>
-    </View>
-  )
-})
+    )
+  },
+)
 
 export default TagsListView

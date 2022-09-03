@@ -13,9 +13,9 @@ export const tabBar =  {
     },
     {
       pagePath: '/pages/publish/index',
-      selectedIconPath: '../assets/img/publish_select.png',
-      iconPath: '../assets/img/publish.png',
-      text: '发布'
+      selectedIconPath: '../assets/img/publish_new.png',
+      iconPath: '../assets/img/publish_new.png',
+      bulge:true
     },
     {
       pagePath: '/pages/user/index',

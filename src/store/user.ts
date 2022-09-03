@@ -39,7 +39,8 @@ export default class UserStore {
           nickName: user.nickName || '',
           avatarUrl: user.avatarUrl || '',
         })
-        setToken(userData.token)
+
+        await setToken(userData.token)
         this.userInfoByToken()
         Toast.success('登录成功')
       },
@@ -47,10 +48,11 @@ export default class UserStore {
   }
 
   async userInfoByToken() {
-    const res: userType = await aggregateInfo()
-    if (res) {
+    const {user}  = await aggregateInfo() as Record<'user',userType>
+    console.log(user);
+    if (user) {
       runInAction(() => {
-        this.user = res
+        this.user = user
       })
     } else {
       getToken() && removeToken()
