@@ -5,8 +5,10 @@ import { Button } from '@/components/universal/Button'
 import { url } from '@/constants/url'
 import { useStore } from '@/store'
 import { Text, View } from '@tarojs/components'
+import { usePullDownRefresh } from '@tarojs/taro'
 
 import styles from './index.module.css'
+import Taro from '@tarojs/taro'
 
 const UserDetail = () => {
   const { userStore } = useStore()
@@ -24,6 +26,10 @@ const UserDetail = () => {
       name: '未认领',
     },
   ]
+  usePullDownRefresh(async () => {
+    await userStore.userInfoByToken()
+    Taro.stopPullDownRefresh()
+  })
   return (
     <View className="p-4 pb-2 fx flex-col bg-white">
       <View className="fx flex-row ml-3">
@@ -48,7 +54,9 @@ const UserDetail = () => {
         {stateCount.map((item, index) => (
           <View
             key={item.name}
-            className={`fx ${index < stateCount.length - 1 ? 'w-full' : 'w-3_4'}`}
+            className={`fx ${
+              index < stateCount.length - 1 ? 'w-full' : 'w-3_4'
+            }`}
           >
             <View className="fx flex-col">
               <Text className="text-center">

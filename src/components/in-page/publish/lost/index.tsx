@@ -11,7 +11,7 @@ const LostForm = () => {
   return (
     <View className="mt-5">
       <LostSeekForm
-        titlePlaceholder="例: 寻求 xx"
+        titlePlaceholder="例: 丢失 xx"
         timeLabel="丢失日期"
         otherLabel="丢失地点 / 外观 / 特征 等"
         onSubmit={(event) => onSubmit(event)}

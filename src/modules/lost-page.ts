@@ -1,4 +1,4 @@
-import { userType } from "./user";
+import type { userType } from "./user";
 
 export interface lostFoundType {
   lostFound: LostFound[];

@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 
 import { useStore } from '@/store'
 import { View,Image } from '@tarojs/components'
-import Taro, { useDidShow } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 import './index.css'
 const CustomTabBar = () => {
   const { tabStore } = useStore()

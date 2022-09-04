@@ -77,7 +77,7 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
   const [loading, setLoading] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
   const firstUpdate = useRef(true)
-  const { lostFoundStore, tabStore } = useStore()
+  const { lostFoundStore, tabStore, userStore } = useStore()
   usePageScroll(({ scrollTop: aScrollTop }) => {
     setScrollTop(aScrollTop)
   })
@@ -92,6 +92,7 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
     if (getReFresh()) {
       lostFoundStore.reset()
       onLoad()
+      userStore.userInfoByToken()
       removeReFresh()
       tabStore.updateTab(0)
     }
@@ -119,6 +120,7 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
       hasMore={lostFoundStore.hasMore}
       scrollTop={scrollTop}
       onLoad={onLoad}
+      className="h-full"
     >
       <View className={styles['grid-masonry']}>
         {lostFoundStore.lost.map((item) => (

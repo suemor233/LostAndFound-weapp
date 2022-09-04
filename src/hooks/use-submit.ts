@@ -1,14 +1,15 @@
 import { useCallback, useState } from 'react'
 
 import { createFound } from '@/api/modules/found'
-import { ILost, createLost } from '@/api/modules/lost'
+import type { ILost} from '@/api/modules/lost';
+import { createLost } from '@/api/modules/lost'
 import { PATH } from '@/constants/path'
 import { getToken, setReFresh } from '@/utils'
 import { Toast } from '@taroify/core'
 import type { BaseEventOrig, FormProps } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 
-import { IFound } from '../api/modules/found'
+import type { IFound } from '../api/modules/found'
 
 interface IProps {
   type: string

@@ -49,7 +49,6 @@ export default class UserStore {
 
   async userInfoByToken() {
     const {user}  = await aggregateInfo() as Record<'user',userType>
-    console.log(user);
     if (user) {
       runInAction(() => {
         this.user = user
