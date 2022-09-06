@@ -1,13 +1,12 @@
+import client from '../request'
 
-import client from "../request"
-
-export interface ILost  {
+export interface ILost {
   title: string
   contact: string
-  category:string
-  lostTime:Date
-  detail:string
-  image:ImageFile[]
+  category: string
+  lostTime: Date
+  detail: string
+  image: ImageFile[]
 }
 
 export interface ImageFile {
@@ -20,9 +19,13 @@ export interface ImageFile {
    */
   type?: string
 
-  cover:boolean
+  cover: boolean
 }
 
-export function createLost(data:ILost) {
-    return client.post('/lost',data)
+export function createLost(data: ILost) {
+  return client.post('/lost', data)
+}
+
+export function lostById(id: string) {
+  return client.get(`/lost/${id}`)
 }

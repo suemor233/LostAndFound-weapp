@@ -5,9 +5,6 @@ import SwiperView from '../../components/in-page/dynamic/swiper-view'
 import TagsListView from '@/components/in-page/dynamic/tags-list-view';
 
 const Dynamic = () => {
-
-
-
   return (
     <ContentLayout>
       <SearchBar />

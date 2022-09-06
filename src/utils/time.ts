@@ -5,14 +5,14 @@ export enum DateFormat {
   'yyyy年M月d日',
   'yyyy年M月d日 HH:mm:ss',
   'HH:mm',
-
+  'M月d日',
   'H:mm:ss A',
   'M-d HH:mm:ss',
 }
 
 export const parseDate = (
   time: string | Date,
-  format: keyof typeof DateFormat = 'yyyy年M月d日',
+  format: keyof typeof DateFormat = 'M月d日',
 ) => {
   const date = new Date(time)
   if (isNaN(date as any)) return 'N/A'

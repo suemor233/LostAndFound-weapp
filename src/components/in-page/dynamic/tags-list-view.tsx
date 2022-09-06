@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite'
 import type { FC } from 'react'
 import { memo, useCallback, useLayoutEffect, useRef, useState } from 'react'
 
+import { PATH } from '@/constants/path'
 import type { FoundDatum, LostDatum } from '@/modules/lost-page'
 import { useStore } from '@/store'
 import { getReFresh, removeReFresh } from '@/utils'
@@ -124,11 +125,11 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
     >
       <View className={styles['grid-masonry']}>
         {lostFoundStore.lost.map((item) => (
-          <ListItem item={item} key={item.id} title={'失物'} />
+          <ListItem item={item} key={item._id} title={'失物'} />
         ))}
 
         {lostFoundStore.found.map((item) => (
-          <ListItem item={item} key={item.id} title={'寻物'} />
+          <ListItem item={item} key={item._id} title={'寻物'} />
         ))}
       </View>
       <List.Placeholder>
@@ -143,7 +144,14 @@ const ListItem: FC<{ item: LostDatum | FoundDatum; title: string }> = memo(
   (props) => {
     const { item, title } = props
     return (
-      <View className="w-full rounded-md bg-white shadow-md whitespace-nowrap">
+      <View
+        className="w-full rounded-md bg-white shadow-md whitespace-nowrap"
+        onClick={() =>
+          Taro.navigateTo({
+            url: `${PATH.DYNAMIC_DETAIL}?id=${item._id}&category=${title}`,
+          })
+        }
+      >
         <Image
           src={item.cover}
           style={{ width: '100%', height: '200px' }}

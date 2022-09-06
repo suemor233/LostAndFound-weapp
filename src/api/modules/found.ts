@@ -14,3 +14,9 @@ export interface IFound  {
 export function createFound(data:IFound) {
     return client.post('/found',data)
 }
+
+export function foundById(id:string) {
+  return client.get(`/found/${id}`)
+}
+
+

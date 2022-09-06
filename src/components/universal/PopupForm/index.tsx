@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from 'react'
 
-import Choice from '@/components/universal/Choice'
+import Choice from '@/components/universal/Icon/Choice'
 import { Form, Input, Popup } from '@taroify/core'
 import type { FormItemInstance } from '@taroify/core/form'
 

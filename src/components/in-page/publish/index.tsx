@@ -1,6 +1,6 @@
 import type { FC} from 'react';
 
-import Choice from '@/components/universal/Choice'
+import Choice from '@/components/universal/Icon/Choice'
 import { Image } from '@taroify/core'
 import { Text, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'

@@ -18,14 +18,14 @@ export interface LostFound {
 }
 
 export interface FoundDatum {
-  id: string;
+  _id: string;
   uid: string;
   title: string;
   contact: string;
   category: string;
   foundTime: string;
   detail: string;
-  image: string;
+  image: string[];
   cover: string;
   user:userType;
   state: boolean;
@@ -35,7 +35,7 @@ export interface FoundDatum {
 
 export interface LostDatum {
   state: boolean;
-  id: string;
+  _id: string;
   uid: string;
   title: string;
   contact: string;

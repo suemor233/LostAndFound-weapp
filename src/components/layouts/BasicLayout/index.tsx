@@ -1,11 +1,16 @@
-import { FC, PropsWithChildren, useMemo } from 'react'
-import { useEffect } from 'react'
+import type { FC, PropsWithChildren} from 'react';
+import { useMemo } from 'react'
 
 import { ConfigProvider, Notify, Toast } from '@taroify/core'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 
-const ContentLayout: FC<PropsWithChildren> = ({ children }) => {
+interface IProps extends  PropsWithChildren{
+  className?:string
+}
+
+const ContentLayout: FC<IProps> = (props) => {
+  const {children,className} = props
   const safeBottom = useMemo(() => {
     const res = Taro.getSystemInfoSync()
     const {
@@ -18,7 +23,7 @@ const ContentLayout: FC<PropsWithChildren> = ({ children }) => {
   }, [])
 
   return (
-    <View style={{ paddingBottom: `${safeBottom}px` }}>
+    <View style={{ paddingBottom: `${safeBottom}px` }} className={className}>
       <Notify id="notify" />
       <Toast id="toast" />
       <ConfigProvider

@@ -5,10 +5,9 @@ import { Button } from '@/components/universal/Button'
 import { url } from '@/constants/url'
 import { useStore } from '@/store'
 import { Text, View } from '@tarojs/components'
-import { usePullDownRefresh } from '@tarojs/taro'
+import Taro, { usePullDownRefresh } from '@tarojs/taro'
 
 import styles from './index.module.css'
-import Taro from '@tarojs/taro'
 
 const UserDetail = () => {
   const { userStore } = useStore()
