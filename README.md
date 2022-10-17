@@ -1,5 +1,11 @@
 ## 失物招领微信小程序
 
+## 开发
+```
+pnpm i
+pnpm dev:weapp
+```
+
 ## 预览
 
 <p align="middle">

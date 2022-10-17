@@ -1,3 +1,5 @@
+import { PATH } from '@/constants/path';
+
 export const dropList = [
   {
     title: '发寻求',
@@ -5,7 +7,7 @@ export const dropList = [
     icon: 'https://y.suemor.com/imagespublish-seek.png',
     backgroundColor: '#FFF3EE',
     width: 40,
-    url:'/pages/publish/seek/index'
+    url:PATH.PUBLISH_SEEK
   },
   {
     title: '找丢失',
@@ -13,7 +15,7 @@ export const dropList = [
     icon: 'https://y.suemor.com/imagespublish-lost.png',
     backgroundColor: '#FFF3DE',
     width: 40,
-    url:'/pages/publish/lost/index'
+    url:PATH.PUBLISH_LOST
   },
   {
     title: '我的发布',
@@ -21,6 +23,6 @@ export const dropList = [
     icon: 'https://y.suemor.com/imagespublish-user2.png',
     backgroundColor: '#FFE33F',
     width: 35,
-    url:'/pages/publish/seek/index'
+    url:PATH.USER_MANAGEMENT
   },
 ]

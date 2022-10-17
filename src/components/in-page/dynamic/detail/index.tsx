@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren} from 'react';
-import {  useCallback } from 'react'
+import {  useCallback  } from 'react';
 import ShareIcon from '@/components/universal/Icon/Share'
 import type { FoundDatum, LostDatum } from '@/modules/lost-page'
 import { parseDate, relativeTimeFromNow } from '@/utils'
@@ -21,6 +21,7 @@ export const DynamicAvatar = <T extends boolean>(props: IProps<T>) => {
         title: `${dynamicDetail.title}`
       }
   })
+
   return (
     <View className="fx justify-between">
       <View className="fx">
@@ -57,6 +58,7 @@ export const DynamicAvatar = <T extends boolean>(props: IProps<T>) => {
 
 export const DetailContent = <T extends boolean>(props: IProps<T>) => {
   const { dynamicDetail, isLost } = props
+
   return (
     <View className="fx flex-col gap-1 mt-5">
       <View>

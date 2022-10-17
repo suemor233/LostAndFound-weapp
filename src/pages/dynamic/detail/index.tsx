@@ -19,6 +19,7 @@ interface routerParamsType {
   category?: string
 }
 
+
 const DynamicDetail = () => {
   const [dynamicDetail, setDynamicDetail] = useState<LostDatum | FoundDatum>()
   const [lost, setLost] = useState<boolean>()
@@ -39,12 +40,12 @@ const DynamicDetail = () => {
     return <MySkeleton />
   }
   return (
-    <Cell >
+    <Cell>
       <ContentLayout>
-        {<DynamicAvatar dynamicDetail={dynamicDetail} isLost={lost} />}
-        {<DetailContent dynamicDetail={dynamicDetail} isLost={lost} />}
-        {<OtherParameter dynamicDetail={dynamicDetail} isLost={lost} />}
-        {<PictureDetail dynamicDetail={dynamicDetail} />}
+          {<DynamicAvatar dynamicDetail={dynamicDetail} isLost={lost} />}
+          {<DetailContent dynamicDetail={dynamicDetail} isLost={lost} />}
+          {<OtherParameter dynamicDetail={dynamicDetail} isLost={lost} />}
+          {<PictureDetail dynamicDetail={dynamicDetail} />}
       </ContentLayout>
     </Cell>
   )
