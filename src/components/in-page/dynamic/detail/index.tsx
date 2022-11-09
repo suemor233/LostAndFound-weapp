@@ -1,7 +1,9 @@
-import type { FC, PropsWithChildren} from 'react';
-import {  useCallback  } from 'react';
+import type { FC, PropsWithChildren } from 'react'
+import { useCallback } from 'react'
+
 import ShareIcon from '@/components/universal/Icon/Share'
 import type { FoundDatum, LostDatum } from '@/modules/lost-page'
+import { useStore } from '@/store'
 import { parseDate, relativeTimeFromNow } from '@/utils'
 import { Button, Image, Tag } from '@taroify/core'
 import { Text, View } from '@tarojs/components'
@@ -16,10 +18,10 @@ export interface IProps<T> {
 
 export const DynamicAvatar = <T extends boolean>(props: IProps<T>) => {
   const { dynamicDetail, isLost } = props
-  useShareAppMessage(res =>{
-      return  {
-        title: `${dynamicDetail.title}`
-      }
+  useShareAppMessage((res) => {
+    return {
+      title: `${dynamicDetail.title}`,
+    }
   })
 
   return (
@@ -75,6 +77,7 @@ export const DetailContent = <T extends boolean>(props: IProps<T>) => {
 
 export const OtherParameter = <T extends boolean>(props: IProps<T>) => {
   const { dynamicDetail, isLost } = props
+  const { disableStore } = useStore()
   const list = [
     {
       title: '类型',
@@ -86,18 +89,20 @@ export const OtherParameter = <T extends boolean>(props: IProps<T>) => {
         ? parseDate((dynamicDetail as LostDatum).lostTime)
         : parseDate((dynamicDetail as FoundDatum).foundTime),
     },
-    {
-      title: '联系方式',
-      value: dynamicDetail.contact,
-    },
+    !disableStore.disable()
+      ? {
+          title: '联系方式',
+          value: dynamicDetail.contact,
+        }
+      : null,
   ]
   return (
     <View className="fx mt-5 px-10">
       {list.map((item, index) => (
-        <View key={item.title} className="fx w-full flex-1">
+        <View key={item?.title} className="fx w-full flex-1">
           <View className="fx flex-col text-xs gap-1 text-center">
-            <Text className=" text-gray-400 ">{item.title}</Text>
-            <Text>{item.value}</Text>
+            <Text className=" text-gray-400 ">{item?.title}</Text>
+            <Text>{item?.value}</Text>
           </View>
           {index < list.length - 1 && (
             <View className="fx items-center" style={{ margin: '0 auto' }}>
@@ -147,7 +152,7 @@ export const PictureDetail = <T extends boolean>(
           src={`${index === 0 ? props.dynamicDetail.cover : item}`}
           mode={'widthFix'}
           key={index}
-          placeholder='正在玩命加载中...'
+          placeholder="正在玩命加载中..."
           className={`${
             index === 0 ||
             (props.dynamicDetail.image.length % 2 === 0 &&

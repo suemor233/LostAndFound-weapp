@@ -11,7 +11,7 @@ export const tabBar =  {
       iconPath: '../assets/img/dynamic.png',
       text: '动态'
     },
-    {
+     {
       pagePath: '/pages/publish/index',
       selectedIconPath: '../assets/img/publish_new.png',
       iconPath: '../assets/img/publish_new.png',
