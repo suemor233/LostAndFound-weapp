@@ -1,4 +1,5 @@
 import client from '../request'
+import type { PageType } from './aggregate'
 
 export interface ILost {
   title: string
@@ -28,4 +29,12 @@ export function createLost(data: ILost) {
 
 export function lostById(id: string) {
   return client.get(`/lost/${id}`)
+}
+
+export function lostList(params: PageType) {
+  return client.get('/aggregate/lost', params)
+}
+
+export function enterBack(data:{id:string}) {
+  return client.post('/lost/enter_back', data)
 }

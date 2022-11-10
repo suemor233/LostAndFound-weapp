@@ -7,6 +7,7 @@ export default {
     'pages/publish/seek/index',
     'pages/user/index',
     'pages/user/management/index',
+
   ],
   window: {
     backgroundTextStyle: 'light',

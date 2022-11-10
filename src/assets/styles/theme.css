@@ -23,3 +23,12 @@ page {
 .fx {
   display: flex;
 }
+
+
+.tagsCategory {
+  color: var(--blue);
+  border: 1px var(--blue) solid;
+  border-radius: 15px;
+  padding: 5px 8px;
+  font-size: 25px;
+}

@@ -1,22 +1,47 @@
-import { useState } from 'react'
+import {
+  createContext } from 'react'
 
-import { Tabs } from '@taroify/core'
-import { View } from '@tarojs/components'
+import ManageItem from '@/components/in-page/user/management/lost'
+import LostMange from '@/components/in-page/user/management/lost'
+import type { LostFound } from '@/modules/lost-page'
+import { ConfigProvider, Tabs } from '@taroify/core'
+
+export const manageListContext = createContext<LostFound | null>(null)
 
 const UserManagement = () => {
-  const [value, setValue] = useState(0)
   return (
-    <View>
-      <Tabs value={value} onChange={setValue} animated swipeable>
-        {
-          list.map(item => <Tabs.TabPane key={item} title={item}>{item}</Tabs.TabPane>)
-        }
+    <ConfigProvider
+      theme={{
+        tabsActiveColor: '#FFC107',
+      }}
+    >
+      <Tabs animated swipeable>
+
+        {list.map((item) => (
+          <Tabs.TabPane
+            key={item.title}
+            title={item.title}
+          >
+            {/* {value && <item.component />} */}
+            <LostMange />
+          </Tabs.TabPane>
+        ))}
 
       </Tabs>
-    </View>
+    </ConfigProvider>
   )
 }
 
-const list = ['丢失中','已找回', '未认领', '已认领']
+// const list = ['丢失中', '已找回', '未认领', '已认领']
+const list = [
+  {
+    title: '丢失中',
+    component: () => <ManageItem />,
+  },
+  {
+    title: '未认领',
+    component: () => <ManageItem />,
+  },
+]
 
 export default UserManagement
