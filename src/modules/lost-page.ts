@@ -25,7 +25,7 @@ export interface FoundDatum {
   category: string;
   foundTime: string;
   detail: string;
-  image: string[];
+  image?: string[];
   cover: string;
   user:userType;
   state: boolean;

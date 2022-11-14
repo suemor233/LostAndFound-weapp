@@ -1,8 +1,11 @@
-import type { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren, useMemo } from 'react'
 import { useRef, useState } from 'react'
+import { useEffect } from 'react'
 
+import { ILost, ImageFile, lostById } from '@/api/modules/lost'
 import PopupForm from '@/components/universal/PopupForm'
 import { category } from '@/constants/publish/lost/listData'
+import { parseDate } from '@/utils'
 import {
   Button,
   Cell,
@@ -16,7 +19,9 @@ import {
 import type { FormItemInstance } from '@taroify/core/form'
 import type { BaseEventOrig, FormProps } from '@tarojs/components'
 import { View } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import Taro, { useDidShow, useRouter } from '@tarojs/taro'
+
+import { IFound } from '../../../api/modules/found'
 
 interface LostSeekFormProps {
   titlePlaceholder: string
@@ -25,6 +30,7 @@ interface LostSeekFormProps {
   formName: string
   disabled: boolean
   onSubmit?: (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => void
+  defaultData?: ILost | IFound | null
 }
 
 const LostSeekForm: FC<LostSeekFormProps> = (props) => {
@@ -35,22 +41,22 @@ const LostSeekForm: FC<LostSeekFormProps> = (props) => {
     otherLabel,
     onSubmit,
     disabled,
+    defaultData,
   } = props
-
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} >
       <Cell.Group inset>
-        <Form.Item name="title">
+        <Form.Item name="title" defaultValue={defaultData?.title}  >
           <Form.Label>标题</Form.Label>
-          <Form.Control>
+          <Form.Control >
             <Input placeholder={titlePlaceholder} />
           </Form.Control>
         </Form.Item>
 
-        <Form.Item name="contact">
+        <Form.Item name="contact" defaultValue={defaultData?.contact}>
           <Form.Label>联系方式</Form.Label>
           <Form.Control>
-            <Input placeholder="例: qq: xxxxx" />
+            <Input placeholder="例: qq: xxxxx"  />
           </Form.Control>
         </Form.Item>
         <CategoryForm
@@ -58,19 +64,25 @@ const LostSeekForm: FC<LostSeekFormProps> = (props) => {
           placeholder="请选择分类"
           list={category}
           formName="category"
+          defaultValue={defaultData?.category}
         />
         <DatetimePickerForm
           title={timeLabel}
           placeholder="选择时间"
           formName={formName}
+          // @ts-ignore
+          defaultValue={defaultData?.lostTime || defaultData?.foundTime}
         />
 
-        <Form.Item name="detail">
+        <Form.Item name="detail" defaultValue={defaultData?.detail}>
           <Form.Control>
-            <Textarea style={{ height: '100px' }} placeholder={otherLabel} />
+            <Textarea
+              style={{ height: '100px' }}
+              placeholder={otherLabel}
+            />
           </Form.Control>
         </Form.Item>
-        <UploaderField />
+        <UploaderField defaultValue={defaultData?.image as any as string[]} />
       </Cell.Group>
       <View style={{ margin: '16px' }}>
         <Button
@@ -93,13 +105,17 @@ interface IProps extends PropsWithChildren {
   title?: string
   placeholder?: string
   newValue?: (value: any) => void
+  defaultValue?: string
 }
 
 export const CategoryForm: FC<IProps> = (props) => {
-  const { list, formName, title, placeholder } = props
+  const { list, formName, title, placeholder, defaultValue } = props
   const itemRef = useRef<FormItemInstance>()
   const [open, setOpen] = useState(false)
 
+  useEffect(() => {
+    itemRef.current?.setValue(defaultValue)
+  }, [defaultValue])
   return (
     <PopupForm
       open={open}
@@ -138,7 +154,13 @@ export const DatetimePickerForm: FC<Omit<IProps, 'list'>> = (props) => {
 
   const [minDate] = useState(new Date(2021, 9, 14))
   const [maxDate] = useState(new Date())
-  const [defaultValue] = useState(new Date(2022, 8, 28))
+  const [defaultValue, setDefaultValue] = useState<Date>(new Date())
+  useEffect(() => {
+    if (props.defaultValue) {
+      setDefaultValue(new Date(props.defaultValue))
+      itemRef.current?.setValue(new Date(props.defaultValue))
+    }
+  }, [props.defaultValue])
   function formatDate(date?: Date) {
     if (date) {
       return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
@@ -161,9 +183,9 @@ export const DatetimePickerForm: FC<Omit<IProps, 'list'>> = (props) => {
         min={minDate}
         max={maxDate}
         defaultValue={defaultValue}
+        value={defaultValue}
         onCancel={() => setOpen(false)}
         onConfirm={(newValue) => {
-          props.newValue?.(newValue)
           itemRef.current?.setValue(newValue)
           setOpen(false)
         }}
@@ -177,28 +199,43 @@ export const DatetimePickerForm: FC<Omit<IProps, 'list'>> = (props) => {
   )
 }
 
-export const UploaderField = () => {
+export const UploaderField: FC<{ defaultValue?: string[] }> = ({
+  defaultValue,
+}) => {
   const itemRef = useRef<FormItemInstance>()
-
+  const [files, setFiles] = useState<ImageFile[]>([])
+  useEffect(() => {
+    if (defaultValue && files.length == 0) {
+      itemRef.current?.setValue(
+        defaultValue.map((item) => ({
+          url: item,
+        })),
+      )
+      setFiles(
+        defaultValue.map((item) => ({
+          url: item,
+        })),
+      )
+    }
+  }, [defaultValue])
+  useEffect(() => {
+    itemRef.current?.setValue(files)
+  }, [files])
   const onUpload = () => {
     Taro.chooseImage({
       count: 5,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
     }).then(({ tempFiles }) => {
-      tempFiles.forEach((item, index) => {
-        itemRef.current?.setValue([
-          ...(itemRef.current?.getValue()
-            ? [...(itemRef.current?.getValue() as any)]
-            : []),
-          {
-            cover: !index,
-            url: item.path,
-            type: item.type,
-            name: item.originalFileObj?.name,
-          },
-        ])
-      })
+      setFiles([
+        ...files,
+        ...tempFiles.map((item, index) => ({
+          cover: !index,
+          url: item.path,
+          type: item.type,
+          name: item.originalFileObj?.name,
+        })),
+      ])
     })
   }
 
@@ -207,10 +244,11 @@ export const UploaderField = () => {
       <Form.Label>上传图片</Form.Label>
       <Form.Control>
         <Uploader
-          value={itemRef.current?.getValue()}
+          value={files}
           multiple={true}
           maxFiles={5}
           onUpload={onUpload}
+          onChange={setFiles as any}
         />
       </Form.Control>
     </Form.Item>

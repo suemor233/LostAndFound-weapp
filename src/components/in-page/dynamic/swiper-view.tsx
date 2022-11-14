@@ -16,29 +16,35 @@ const SwiperView = () => {
       {
         <Swiper className={styles['image-swiper']} lazyRender autoplay={4000}>
           <Swiper.Indicator className={styles['image-swiper-point']} />
-          {lostFoundStore.radomSwiper.randomLostFound.map((item: LostDatum) => (
-            <Swiper.Item
-              key={item._id}
-              onClick={() =>
-                Taro.navigateTo({
-                  url: `${PATH.DYNAMIC_DETAIL}?id=${item._id}&category=${
-                    item.lostTime ? '失物' : '寻物'
-                  }`,
-                })
-              }
-            >
-              <View className={styles['image-swiper-wrapper']}>
-                <Image
-                  className={styles['image-swiper-wrapper-image']}
-                  src={item.cover}
-                  mode="aspectFill"
-                />
-                <Text className={styles['image-swiper-wrapper-text']}>
-                  {item.title}
-                </Text>
-              </View>
-            </Swiper.Item>
-          ))}
+          {lostFoundStore.radomSwiper.randomLostFound.map(
+            (item: LostDatum) =>
+              item && (
+                <Swiper.Item
+                  key={item._id}
+                  onClick={() =>
+                    Taro.navigateTo({
+                      url: `${PATH.DYNAMIC_DETAIL}?id=${item._id}&category=${
+                        item.lostTime ? '失物' : '寻物'
+                      }`,
+                    })
+                  }
+                >
+                  <View className={styles['image-swiper-wrapper']}>
+                    {item.cover && (
+                      <Image
+                        className={styles['image-swiper-wrapper-image']}
+                        src={item.cover}
+                        mode="aspectFill"
+                      />
+                    )}
+
+                    <Text className={styles['image-swiper-wrapper-text']}>
+                      {item.title}
+                    </Text>
+                  </View>
+                </Swiper.Item>
+              ),
+          )}
         </Swiper>
       }
     </>

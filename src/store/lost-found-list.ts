@@ -19,22 +19,22 @@ export default class LostFoundStore {
   }
 
   async getLostFoundList(url: string) {
+
     const res = (await lostFoundListByUrl(url, {
       pageCurrent: this.pageCurrent,
       pageSize: 10,
-    })) as lostFoundType
+    }))
 
     if (res) {
       if (res.lostFound) {
         this.lost.push(...res.lostFound[0].lostData)
         this.found.push(...res.lostFound[1].foundData)
-      } else if (res.lost) {
-        this.lost.push(...res.lost.lostData)
-      } else if (res.found) {
-        this.found.push(...res.found.foundData)
+      } else if (res.lostData) {
+        this.lost.push(...res.lostData)
+      } else if (res.foundData) {
+        this.found.push(...res.foundData)
       }
     }
-
     this.hasMore = !!res.totalCount
     this.pageCurrent++
     if (this.lost.length > 0 && this.found.length > 0) {
@@ -69,7 +69,11 @@ export default class LostFoundStore {
       found[index] = found[i]
       foundCount--
     }
-    this.radomSwiper.randomLostFound = [...resultLost, ...resultFound]
+
+    this.radomSwiper.randomLostFound = [
+      ...resultLost.filter((res) => res?.cover != ''),
+      ...resultFound.filter((res) => res?.cover != ''),
+    ]
   }
 
   async reset() {

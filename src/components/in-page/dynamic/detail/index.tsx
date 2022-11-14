@@ -1,5 +1,6 @@
-import type { FC, PropsWithChildren} from 'react';
-import {  useCallback  } from 'react';
+import type { FC, PropsWithChildren } from 'react'
+import { useCallback } from 'react'
+
 import ShareIcon from '@/components/universal/Icon/Share'
 import type { FoundDatum, LostDatum } from '@/modules/lost-page'
 import { parseDate, relativeTimeFromNow } from '@/utils'
@@ -16,10 +17,10 @@ export interface IProps<T> {
 
 export const DynamicAvatar = <T extends boolean>(props: IProps<T>) => {
   const { dynamicDetail, isLost } = props
-  useShareAppMessage(res =>{
-      return  {
-        title: `${dynamicDetail.title}`
-      }
+  useShareAppMessage((res) => {
+    return {
+      title: `${dynamicDetail.title}`,
+    }
   })
 
   return (
@@ -136,30 +137,36 @@ export const PictureDetail = <T extends boolean>(
   const handlepreviewImage = useCallback((url: string) => {
     Taro.previewImage({
       current: url,
-      urls: props.dynamicDetail.image,
+      urls: props.dynamicDetail.image || [],
     })
   }, [])
+
   return (
     <View className="grid grid-cols-2 mt-5 gap-1 rounded-md overflow-hidden">
-      {props.dynamicDetail.image.map((item, index) => (
-        <Image
-          style={{ width: '100%', height: '200px' }}
-          src={`${index === 0 ? props.dynamicDetail.cover : item}`}
-          mode={'widthFix'}
-          key={index}
-          placeholder='正在玩命加载中...'
-          className={`${
-            index === 0 ||
-            (props.dynamicDetail.image.length % 2 === 0 &&
-              index === props.dynamicDetail.image.length - 1)
-              ? 'col-span-2'
-              : 'col-span-1'
-          }`}
-          onClick={() =>
-            handlepreviewImage(index === 0 ? props.dynamicDetail.cover : item)
-          }
-        />
-      ))}
+      {props.dynamicDetail.image?.map(
+        (item, index) =>
+          props.dynamicDetail.image && (
+            <Image
+              style={{ width: '100%', height: '200px' }}
+              src={item}
+              mode={'widthFix'}
+              key={index}
+              placeholder="正在玩命加载中..."
+              className={`${
+                index === 0 ||
+                (props.dynamicDetail.image.length % 2 === 0 &&
+                  index === props.dynamicDetail.image.length - 1)
+                  ? 'col-span-2'
+                  : 'col-span-1'
+              }`}
+              onClick={() =>
+                handlepreviewImage(
+                  index === 0 ? props.dynamicDetail.cover : item,
+                )
+              }
+            />
+          ),
+      )}
     </View>
   )
 }

@@ -152,12 +152,13 @@ const ListItem: FC<{ item: LostDatum | FoundDatum; title: string }> = memo(
           })
         }
       >
+
         <Image
           src={item.cover}
           style={{ width: '100%', height: '200px' }}
           mode="aspectFill"
           className="rounded-t-md"
-          placeholder="加载中..."
+          placeholder={item.cover ?'加载中...' : '暂无图片'}
         />
         <View className="fx flex-col p-2 gap-2">
           <View className="fx">

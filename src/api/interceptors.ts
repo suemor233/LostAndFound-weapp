@@ -19,10 +19,6 @@ const customInterceptor = (chain) => {
   })
 }
 
-// Taro 提供了两个内置拦截器
-// logInterceptor - 用于打印请求的相关信息
-// timeoutInterceptor - 在请求超时时抛出错误。
-// const interceptors = [customInterceptor, Taro.interceptors.logInterceptor]
 const interceptors = [customInterceptor]
 
 export default interceptors
