@@ -1,13 +1,13 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState , useRef } from 'react'
 
-import { ILost, lostById } from '@/api/modules/lost'
+import type { ILost} from '@/api/modules/lost';
+import { lostById } from '@/api/modules/lost'
 import { Notify } from '@taroify/core'
 import { View } from '@tarojs/components'
-import { useDidShow, useLoad, useRouter } from '@tarojs/taro'
+import { useDidShow, useRouter } from '@tarojs/taro'
 
 import { useSubmit } from '../../../../hooks/use-submit'
 import LostSeekForm from '../lost-seek-form'
-import { useRef } from 'react';
 
 
 const LostForm = () => {

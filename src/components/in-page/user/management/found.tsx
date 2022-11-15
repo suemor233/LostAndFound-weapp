@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from 'react'
 import { foundList } from '@/api/modules/found'
 import type { FoundDatum,LostFound } from '@/modules/lost-page'
 import { parseDate } from '@/utils'
-import { Dialog, Image, List, Loading, Tag, Toast } from '@taroify/core'
+import { Image, List, Loading, Notify, Tag, Toast } from '@taroify/core'
 import Button from '@taroify/core/button/button'
 import { Text, View } from '@tarojs/components'
 import Taro, { usePageScroll, usePullDownRefresh } from '@tarojs/taro'
@@ -78,12 +78,14 @@ const FoundMange = () => {
 
 const LostMangeItem: FC<FoundDatum & { resetData: () => void }> = (props) => {
   const { title, created, category, _id, resetData, cover } = props
-  const [dialogOpen, setDialogOpen] = useState(false)
 
   const openDialog = useCallback(async () => {
-    await foundEnterBack({ id: _id })
+    await foundEnterBack({ id: _id ,state:0})
     resetData()
-    setDialogOpen(false)
+    Taro.showToast({
+      title: '成功',
+      icon: 'success',
+    })
   }, [_id, resetData])
   return (
     <View className="mt-2 fx gap-2 p-3 shadow-md bg-white">

@@ -8,9 +8,10 @@ import { Image, List, Loading, Tag, Toast } from '@taroify/core'
 import Button from '@taroify/core/button/button'
 import { Text, View } from '@tarojs/components'
 import Taro, { usePageScroll, usePullDownRefresh } from '@tarojs/taro'
+import { lostListAlrealy } from '../../../../api/modules/lost';
 
 let timeout
-const LostMange = () => {
+const LostAlready = () => {
   const [value, setValue] = useState<LostDatum[]>([])
   const [loading, setLoading] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
@@ -44,7 +45,7 @@ const LostMange = () => {
   }
 
   const getData = useCallback(async () => {
-    const list =  (await lostList({
+    const list =  (await lostListAlrealy({
         pageCurrent: currentPage,
         pageSize: 10,
       })) as LostFound
@@ -80,13 +81,12 @@ const LostMangeItem: FC<LostDatum & { resetData: () => void }> = (props) => {
   const { title, created, category, _id, resetData, cover } = props
 
   const openDialog = useCallback(async () => {
-    await lostEnterBack({ id: _id,state: 0 })
+    await lostEnterBack({ id: _id,state:1 })
     resetData()
     Taro.showToast({
       title: '成功',
       icon: 'success',
     })
-
   }, [_id, resetData])
   return (
     <View className="mt-2 fx gap-2 p-3 shadow-md bg-white">
@@ -112,18 +112,7 @@ const LostMangeItem: FC<LostDatum & { resetData: () => void }> = (props) => {
           {parseDate(created, 'yyyy年M月d日 HH:mm:ss')}
         </Text>
         <View className="fx gap-2">
-          <Button
-            shape="round"
-            color="warning"
-            style={{ height: '30px', color: '#fff' }}
-            onClick={() =>
-              Taro.navigateTo({
-                url: `/pages/publish/lost/index?id=${_id}`,
-              })
-            }
-          >
-            编辑
-          </Button>
+
           <Button
             shape="round"
             style={{
@@ -133,11 +122,11 @@ const LostMangeItem: FC<LostDatum & { resetData: () => void }> = (props) => {
             }}
             onClick={openDialog}
           >
-            确认找回
+            重新发布
           </Button>
         </View>
       </View>
     </View>
   )
 }
-export default LostMange
+export default LostAlready

@@ -15,14 +15,17 @@ const UserDetail = () => {
     {
       count: userStore.user?.lost.lostCount,
       name: '丢失中',
+      url:'/pages/user/management/index?type=lost',
     },
     {
       count: userStore.user?.lost.foundCount,
       name: '已找回',
+      url:'/pages/user/management/index?type=alreayLost',
     },
     {
       count: userStore.user?.found.UnclaimedCount,
       name: '未认领',
+      url:'/pages/user/management/index?type=found',
     },
   ]
   usePullDownRefresh(async () => {
@@ -56,6 +59,7 @@ const UserDetail = () => {
             className={`fx ${
               index < stateCount.length - 1 ? 'w-full' : 'w-3_4'
             }`}
+            onClick={() => Taro.navigateTo({url:item.url})}
           >
             <View className="fx flex-col">
               <Text className="text-center">

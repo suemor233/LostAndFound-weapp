@@ -1,17 +1,18 @@
 import type { FC } from 'react'
 import { useCallback, useRef, useState } from 'react'
 
-import {lostEnterBack, lostList } from '@/api/modules/lost'
-import type { LostDatum, LostFound } from '@/modules/lost-page'
+import { foundListAlrealy } from '@/api/modules/found'
+import type { FoundDatum,LostFound } from '@/modules/lost-page'
 import { parseDate } from '@/utils'
 import { Image, List, Loading, Tag, Toast } from '@taroify/core'
 import Button from '@taroify/core/button/button'
 import { Text, View } from '@tarojs/components'
 import Taro, { usePageScroll, usePullDownRefresh } from '@tarojs/taro'
+import { foundEnterBack } from '../../../../api/modules/found';
 
 let timeout
-const LostMange = () => {
-  const [value, setValue] = useState<LostDatum[]>([])
+const FoundAlready = () => {
+  const [value, setValue] = useState<FoundDatum[]>([])
   const [loading, setLoading] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
   const [currentPage, setcurrentPage] = useState(1)
@@ -44,14 +45,13 @@ const LostMange = () => {
   }
 
   const getData = useCallback(async () => {
-    const list =  (await lostList({
+    const list = (await foundListAlrealy({
         pageCurrent: currentPage,
         pageSize: 10,
       })) as LostFound
-
     setcurrentPage((currentPage) => currentPage + 1)
-    hasMore.current = !!list.lostData.length
-    setValue([...value, ...list.lostData])
+    hasMore.current = !!list.foundData.length
+    setValue([...value, ...list.foundData])
   }, [currentPage, value])
 
   return (
@@ -76,17 +76,16 @@ const LostMange = () => {
   )
 }
 
-const LostMangeItem: FC<LostDatum & { resetData: () => void }> = (props) => {
+const LostMangeItem: FC<FoundDatum & { resetData: () => void }> = (props) => {
   const { title, created, category, _id, resetData, cover } = props
 
   const openDialog = useCallback(async () => {
-    await lostEnterBack({ id: _id,state: 0 })
+    await foundEnterBack({ id: _id,state: 1 })
     resetData()
     Taro.showToast({
       title: '成功',
       icon: 'success',
     })
-
   }, [_id, resetData])
   return (
     <View className="mt-2 fx gap-2 p-3 shadow-md bg-white">
@@ -96,6 +95,7 @@ const LostMangeItem: FC<LostDatum & { resetData: () => void }> = (props) => {
         mode="aspectFill"
         placeholder={!cover && '暂无图片'}
       />
+
       <View className="fx flex-col justify-between">
         <View>
           <Text className="text-md">{title}</Text>
@@ -114,18 +114,6 @@ const LostMangeItem: FC<LostDatum & { resetData: () => void }> = (props) => {
         <View className="fx gap-2">
           <Button
             shape="round"
-            color="warning"
-            style={{ height: '30px', color: '#fff' }}
-            onClick={() =>
-              Taro.navigateTo({
-                url: `/pages/publish/lost/index?id=${_id}`,
-              })
-            }
-          >
-            编辑
-          </Button>
-          <Button
-            shape="round"
             style={{
               height: '30px',
               backgroundColor: '#FFC107',
@@ -133,11 +121,12 @@ const LostMangeItem: FC<LostDatum & { resetData: () => void }> = (props) => {
             }}
             onClick={openDialog}
           >
-            确认找回
+            重新发布
           </Button>
         </View>
       </View>
+
     </View>
   )
 }
-export default LostMange
+export default FoundAlready

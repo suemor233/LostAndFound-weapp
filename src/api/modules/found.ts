@@ -1,6 +1,6 @@
 
 import client from "../request"
-import { PageType } from "./aggregate"
+import type { PageType } from "./aggregate"
 import type { ImageFile } from "./lost"
 
 export interface IFound  {
@@ -28,7 +28,10 @@ export function foundList(params: PageType) {
   return client.get('/aggregate/found', params)
 }
 
+export function foundListAlrealy(params: PageType) {
+  return client.get('/aggregate/found/alreary', params)
+}
 
-export function foundEnterBack(data:{id:string}) {
+export function foundEnterBack(data:{id:string,state:number}) {
   return client.post('/found/enter_back', data)
 }

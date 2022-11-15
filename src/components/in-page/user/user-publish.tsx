@@ -2,6 +2,7 @@ import { Image } from '@taroify/core'
 import { Text, View } from '@tarojs/components'
 import styles from './index.module.css';
 import { userPulish } from '../../../constants/icon'
+import Taro from '@tarojs/taro';
 
 const UserPublish = () => {
   return (
@@ -13,7 +14,7 @@ const UserPublish = () => {
         </View>
         <View className="fx flex-row justify-between px-4">
           {userPulish.map((item) => (
-            <View className="fx flex-col" key={item.name}>
+            <View className="fx flex-col" key={item.name} onClick={() => Taro.navigateTo({url:item.url})}>
               <Image
                 className="fx justify-center"
                 src={item.icom}

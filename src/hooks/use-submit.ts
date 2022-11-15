@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react'
 
 import { createFound, updateFound } from '@/api/modules/found'
-import { ILost, updateLost } from '@/api/modules/lost'
-import { createLost } from '@/api/modules/lost'
+import type { ILost} from '@/api/modules/lost';
+import { updateLost , createLost } from '@/api/modules/lost'
 import { removePhotoFound, removePhotoLost } from '@/api/modules/upload'
 import { PATH } from '@/constants/path'
 import { getToken, setReFresh } from '@/utils'

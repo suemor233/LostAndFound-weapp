@@ -6,7 +6,8 @@ import { useDidShow, useRouter } from '@tarojs/taro'
 import { useMemo, useRef, useState } from 'react'
 
 import LostSeekForm from '../lost-seek-form'
-import { foundById, IFound } from '../../../../api/modules/found';
+import type { IFound } from '../../../../api/modules/found';
+import { foundById } from '../../../../api/modules/found';
 
 const SeekForm = () => {
   const router = useRouter()

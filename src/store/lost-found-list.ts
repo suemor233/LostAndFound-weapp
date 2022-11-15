@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 
 import { lostFoundListByUrl } from '@/api/modules/aggregate'
-import type { FoundDatum, LostDatum, lostFoundType } from '@/modules/lost-page'
+import type { FoundDatum, LostDatum } from '@/modules/lost-page'
 
 export default class LostFoundStore {
   lost: LostDatum[] = []

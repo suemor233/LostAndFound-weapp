@@ -1,11 +1,9 @@
-import { FC, PropsWithChildren, useMemo } from 'react'
-import { useRef, useState } from 'react'
-import { useEffect } from 'react'
+import type { FC, PropsWithChildren} from 'react';
+import {  useRef, useState , useEffect } from 'react'
 
-import { ILost, ImageFile, lostById } from '@/api/modules/lost'
+import type { ILost, ImageFile} from '@/api/modules/lost';
 import PopupForm from '@/components/universal/PopupForm'
 import { category } from '@/constants/publish/lost/listData'
-import { parseDate } from '@/utils'
 import {
   Button,
   Cell,
@@ -19,9 +17,10 @@ import {
 import type { FormItemInstance } from '@taroify/core/form'
 import type { BaseEventOrig, FormProps } from '@tarojs/components'
 import { View } from '@tarojs/components'
-import Taro, { useDidShow, useRouter } from '@tarojs/taro'
+import Taro from '@tarojs/taro'
 
-import { IFound } from '../../../api/modules/found'
+import type { IFound } from '../../../api/modules/found'
+import { url } from '@/constants/url';
 
 interface LostSeekFormProps {
   titlePlaceholder: string
@@ -219,7 +218,7 @@ export const UploaderField: FC<{ defaultValue?: string[] }> = ({
     }
   }, [defaultValue])
   useEffect(() => {
-    itemRef.current?.setValue(files)
+    itemRef.current?.setValue(files.map((item,index) => ({url:item.url,cover:!index})))
   }, [files])
   const onUpload = () => {
     Taro.chooseImage({
@@ -230,12 +229,13 @@ export const UploaderField: FC<{ defaultValue?: string[] }> = ({
       setFiles([
         ...files,
         ...tempFiles.map((item, index) => ({
-          cover: !index,
           url: item.path,
           type: item.type,
           name: item.originalFileObj?.name,
         })),
       ])
+
+
     })
   }
 

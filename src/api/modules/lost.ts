@@ -39,6 +39,11 @@ export function updateLost(data: ILost,id:string) {
   return client.patch(`/lost/${id}`, data)
 }
 
-export function lostEnterBack(data:{id:string}) {
+export function lostListAlrealy(params: PageType) {
+  return client.get('/aggregate/lost/alreary', params)
+}
+
+
+export function lostEnterBack(data:{id:string,state:number}) {
   return client.post('/lost/enter_back', data)
 }
