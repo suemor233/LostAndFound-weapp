@@ -169,7 +169,7 @@ const ListItem: FC<{ item: LostDatum | FoundDatum; title: string }> = memo(
             >
               {title}
             </Tag>
-            <Text className="text-base ml-2 overflow-ellipsis overflow-hidden ">
+            <Text className="text-base ml-2 overflow-ellipsis overflow-hidden">
               {item.title}
             </Text>
           </View>

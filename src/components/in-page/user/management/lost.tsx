@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useCallback, useRef, useState } from 'react'
 
-import {lostEnterBack, lostList } from '@/api/modules/lost'
+import { lostEnterBack, userLostList } from '@/api/modules/lost'
 import type { LostDatum, LostFound } from '@/modules/lost-page'
 import { parseDate } from '@/utils'
 import { Image, List, Loading, Tag, Toast } from '@taroify/core'
@@ -44,10 +44,10 @@ const LostMange = () => {
   }
 
   const getData = useCallback(async () => {
-    const list =  (await lostList({
-        pageCurrent: currentPage,
-        pageSize: 10,
-      })) as LostFound
+    const list = (await userLostList({
+      pageCurrent: currentPage,
+      pageSize: 10,
+    })) as LostFound
 
     setcurrentPage((currentPage) => currentPage + 1)
     hasMore.current = !!list.lostData.length
@@ -80,31 +80,27 @@ const LostMangeItem: FC<LostDatum & { resetData: () => void }> = (props) => {
   const { title, created, category, _id, resetData, cover } = props
 
   const openDialog = useCallback(async () => {
-    await lostEnterBack({ id: _id,state: 0 })
+    await lostEnterBack({ id: _id, state: 0 })
     resetData()
     Taro.showToast({
       title: '成功',
       icon: 'success',
     })
-
   }, [_id, resetData])
   return (
     <View className="mt-2 fx gap-2 p-3 shadow-md bg-white">
       <Image
         src={cover}
-        style={{ width: '150px', height: '90px' }}
+        style={{ width: '150px', height: '100px' }}
         mode="aspectFill"
         placeholder={!cover && '暂无图片'}
       />
-      <View className="fx flex-col justify-between">
+      <View className="fx flex-col gap-1" style={{ maxWidth: '200px' }}>
         <View>
-          <Text className="text-md">{title}</Text>
-          <Tag
-            color="info"
-            shape="rounded"
-            style={{ borderRadius: '10%', padding: '0px 5px' }}
-            className="ml-2"
-          >
+          <Text className="text-md overflow-hidden text-ellipsis whitespace-nowrap w-full inline-block">
+            {title}
+          </Text>
+          <Tag color="info" shape="rounded" size="medium">
             {category}
           </Tag>
         </View>

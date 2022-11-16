@@ -52,7 +52,7 @@ const UserDetail = () => {
           )}
         </View>
       </View>
-      <View className="fx justify-between my-3 ml-5">
+      <View className="fx my-3 ml-5">
         {stateCount.map((item, index) => (
           <View
             key={item.name}

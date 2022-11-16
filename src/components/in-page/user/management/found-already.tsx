@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { useCallback, useRef, useState } from 'react'
 
-import { foundListAlrealy } from '@/api/modules/found'
+import { userFoundListAlrealy } from '@/api/modules/found'
 import type { FoundDatum,LostFound } from '@/modules/lost-page'
 import { parseDate } from '@/utils'
 import { Image, List, Loading, Tag, Toast } from '@taroify/core'
@@ -45,7 +45,7 @@ const FoundAlready = () => {
   }
 
   const getData = useCallback(async () => {
-    const list = (await foundListAlrealy({
+    const list = (await userFoundListAlrealy({
         pageCurrent: currentPage,
         pageSize: 10,
       })) as LostFound
@@ -89,28 +89,24 @@ const LostMangeItem: FC<FoundDatum & { resetData: () => void }> = (props) => {
   }, [_id, resetData])
   return (
     <View className="mt-2 fx gap-2 p-3 shadow-md bg-white">
-      <Image
-        src={cover}
-        style={{ width: '150px', height: '90px' }}
-        mode="aspectFill"
-        placeholder={!cover && '暂无图片'}
-      />
-
-      <View className="fx flex-col justify-between">
-        <View>
-          <Text className="text-md">{title}</Text>
-          <Tag
-            color="info"
-            shape="rounded"
-            style={{ borderRadius: '10%', padding: '0px 5px' }}
-            className="ml-2"
-          >
-            {category}
-          </Tag>
-        </View>
-        <Text className="text-sm text-gray-500">
-          {parseDate(created, 'yyyy年M月d日 HH:mm:ss')}
+    <Image
+      src={cover}
+      style={{ width: '150px', height: '100px' }}
+      mode="aspectFill"
+      placeholder={!cover && '暂无图片'}
+    />
+    <View className="fx flex-col gap-1" style={{ maxWidth: '200px' }}>
+      <View>
+        <Text className="text-md overflow-hidden text-ellipsis whitespace-nowrap w-full inline-block">
+          {title}
         </Text>
+        <Tag color="info" shape="rounded" size="medium">
+          {category}
+        </Tag>
+      </View>
+      <Text className="text-sm text-gray-500">
+        {parseDate(created, 'yyyy年M月d日 HH:mm:ss')}
+      </Text>
         <View className="fx gap-2">
           <Button
             shape="round"

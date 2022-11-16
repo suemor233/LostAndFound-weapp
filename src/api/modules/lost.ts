@@ -35,6 +35,10 @@ export function lostList(params: PageType) {
   return client.get('/aggregate/lost', params)
 }
 
+export function userLostList(params: PageType) {
+  return client.get('/lost/list', params)
+}
+
 export function updateLost(data: ILost,id:string) {
   return client.patch(`/lost/${id}`, data)
 }
@@ -42,6 +46,11 @@ export function updateLost(data: ILost,id:string) {
 export function lostListAlrealy(params: PageType) {
   return client.get('/aggregate/lost/alreary', params)
 }
+
+export function userLostListAlrealy(params: PageType) {
+  return client.get('/lost/alreary', params)
+}
+
 
 
 export function lostEnterBack(data:{id:string,state:number}) {

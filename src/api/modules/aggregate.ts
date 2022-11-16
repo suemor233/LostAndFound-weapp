@@ -16,3 +16,8 @@ export function lostFoundList(params: PageType) {
 export function lostFoundListByUrl(url:string,params: PageType) {
   return client.get(`/aggregate/${url}`,  params )
 }
+
+
+export function search(params: {search:string}) {
+  return client.get(`/aggregate/search`,  params )
+}

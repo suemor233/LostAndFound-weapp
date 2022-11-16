@@ -2,6 +2,7 @@ export default {
   pages: [
     'pages/dynamic/index',
     'pages/dynamic/detail/index',
+    'pages/dynamic/search/index',
     'pages/publish/lost/index',
     'pages/publish/index',
     'pages/publish/seek/index',

@@ -1,6 +1,6 @@
-import type { FC, PropsWithChildren } from 'react'
-import { useCallback } from 'react'
-
+import type { FC, PropsWithChildren} from 'react';
+import { useEffect , useCallback , useState } from 'react'
+import clsx from 'clsx';
 import ShareIcon from '@/components/universal/Icon/Share'
 import type { FoundDatum, LostDatum } from '@/modules/lost-page'
 import { parseDate, relativeTimeFromNow } from '@/utils'
@@ -140,9 +140,16 @@ export const PictureDetail = <T extends boolean>(
       urls: props.dynamicDetail.image || [],
     })
   }, [])
+  const [visible,setVisible] = useState('invisible')
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setVisible('visible')
+    },500)
+  },[])
 
   return (
-    <View className="grid grid-cols-2 mt-5 gap-1 rounded-md overflow-hidden">
+    <View className={clsx("grid grid-cols-2 mt-5 gap-1 rounded-md overflow-hidden",visible)}>
       {props.dynamicDetail.image?.map(
         (item, index) =>
           props.dynamicDetail.image && (

@@ -116,6 +116,7 @@ export const useSubmit = (type: string, update: string | undefined) => {
                     }
                   },
                   fail: (res) => {
+                    console.log(res);
                     setDisabled(false)
                     Toast.fail({
                       message: '图片上传失败',

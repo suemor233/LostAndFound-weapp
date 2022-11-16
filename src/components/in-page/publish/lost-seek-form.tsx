@@ -20,7 +20,6 @@ import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 
 import type { IFound } from '../../../api/modules/found'
-import { url } from '@/constants/url';
 
 interface LostSeekFormProps {
   titlePlaceholder: string

@@ -28,8 +28,16 @@ export function foundList(params: PageType) {
   return client.get('/aggregate/found', params)
 }
 
+export function userFoundList(params: PageType) {
+  return client.get('/found/list', params)
+}
+
 export function foundListAlrealy(params: PageType) {
   return client.get('/aggregate/found/alreary', params)
+}
+
+export function userFoundListAlrealy(params: PageType) {
+  return client.get('/found/alreary', params)
 }
 
 export function foundEnterBack(data:{id:string,state:number}) {
