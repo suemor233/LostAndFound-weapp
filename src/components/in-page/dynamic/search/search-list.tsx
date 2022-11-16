@@ -40,7 +40,7 @@ const SearchItem: FC<(LostDatum | FoundDatum) & { type: '失物' | '寻物' }> =
     >
       <Image
         src={cover}
-        style={{ width: '150px', height: '90px' }}
+        style={{ width: '250px', height: '90px' }}
         mode="aspectFill"
         placeholder={!cover && '暂无图片'}
       />

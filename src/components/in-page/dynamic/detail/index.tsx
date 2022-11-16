@@ -1,10 +1,17 @@
-import type { FC, PropsWithChildren} from 'react';
-import { useEffect , useCallback , useState } from 'react'
-import clsx from 'clsx';
+import clsx from 'clsx'
+import type { FC, PropsWithChildren } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+
 import ShareIcon from '@/components/universal/Icon/Share'
 import type { FoundDatum, LostDatum } from '@/modules/lost-page'
 import { parseDate, relativeTimeFromNow } from '@/utils'
-import { Button, Image, Tag } from '@taroify/core'
+import {
+  Button,
+  Dialog,
+  Image,
+  Tag,
+} from '@taroify/core'
+import type { ITouchEvent} from '@tarojs/components';
 import { Text, View } from '@tarojs/components'
 import Taro, { useShareAppMessage } from '@tarojs/taro'
 
@@ -17,11 +24,20 @@ export interface IProps<T> {
 
 export const DynamicAvatar = <T extends boolean>(props: IProps<T>) => {
   const { dynamicDetail, isLost } = props
+  const [open, setOpen] = useState(false)
   useShareAppMessage((res) => {
     return {
       title: `${dynamicDetail.title}`,
     }
   })
+
+  const handleDialog = () => {
+    Taro.setClipboardData({
+      data: dynamicDetail.title,
+    })
+
+    setOpen(false)
+  }
 
   return (
     <View className="fx justify-between">
@@ -50,9 +66,19 @@ export const DynamicAvatar = <T extends boolean>(props: IProps<T>) => {
           </Text>
         </View>
       </View>
-      <View className="fx items-center">
+      <View className="fx items-center gap-3">
+        <ContactButton onClick={()=>setOpen(true)}>取得联系</ContactButton>
         <ShareButton>分享</ShareButton>
       </View>
+
+      <Dialog open={open} onClose={setOpen}>
+        <Dialog.Header>联系方式</Dialog.Header>
+        <Dialog.Content>{dynamicDetail.contact}</Dialog.Content>
+        <Dialog.Actions>
+          <Button onClick={() => setOpen(false)}>取消</Button>
+          <Button style={{color:'#edce1c'}} onClick={handleDialog}>复制</Button>
+        </Dialog.Actions>
+      </Dialog>
     </View>
   )
 }
@@ -88,8 +114,8 @@ export const OtherParameter = <T extends boolean>(props: IProps<T>) => {
         : parseDate((dynamicDetail as FoundDatum).foundTime),
     },
     {
-      title: '联系方式',
-      value: dynamicDetail.contact,
+      title: '捡到地点',
+      value: dynamicDetail.place,
     },
   ]
   return (
@@ -131,25 +157,50 @@ const ShareButton: FC<PropsWithChildren> = ({ children }) => {
   )
 }
 
+const ContactButton: FC<
+  PropsWithChildren<{ onClick?: ((event: ITouchEvent) => void) | undefined }>
+> = ({ children, onClick }) => {
+  return (
+    <Button
+      style={{
+        background: '#FFE33F',
+        color: '#4B5563',
+        borderRadius: '20px',
+        padding: '0px 10px',
+        height: '35px',
+      }}
+      onClick={onClick}
+    >
+      {children}
+    </Button>
+  )
+}
+
 export const PictureDetail = <T extends boolean>(
   props: Omit<IProps<T>, 'isLost'>,
 ) => {
+  const [visible, setVisible] = useState('invisible')
+
   const handlepreviewImage = useCallback((url: string) => {
     Taro.previewImage({
       current: url,
       urls: props.dynamicDetail.image || [],
     })
   }, [])
-  const [visible,setVisible] = useState('invisible')
 
-  useEffect(()=>{
-    setTimeout(()=>{
+  useEffect(() => {
+    setTimeout(() => {
       setVisible('visible')
-    },500)
-  },[])
+    }, 500)
+  }, [])
 
   return (
-    <View className={clsx("grid grid-cols-2 mt-5 gap-1 rounded-md overflow-hidden",visible)}>
+    <View
+      className={clsx(
+        'grid grid-cols-2 mt-5 gap-1 rounded-md overflow-hidden',
+        visible,
+      )}
+    >
       {props.dynamicDetail.image?.map(
         (item, index) =>
           props.dynamicDetail.image && (

@@ -5,6 +5,7 @@ export interface ILost {
   title: string
   contact: string
   category: string
+  place:string
   lostTime: Date
   detail: string
   image: ImageFile[]

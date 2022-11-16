@@ -7,6 +7,7 @@ export interface IFound  {
   title: string
   contact: string
   category:string
+  place:string
   foundTime:Date
   detail:string
   image:ImageFile[]

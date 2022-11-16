@@ -57,6 +57,12 @@ const LostSeekForm: FC<LostSeekFormProps> = (props) => {
             <Input placeholder="例: qq: xxxxx"  />
           </Form.Control>
         </Form.Item>
+        <Form.Item name="place" defaultValue={defaultData?.place}>
+          <Form.Label>捡到地点</Form.Label>
+          <Form.Control>
+            <Input placeholder="例: xx学校xx食堂"  />
+          </Form.Control>
+        </Form.Item>
         <CategoryForm
           title="分类"
           placeholder="请选择分类"

@@ -91,7 +91,7 @@ const LostMangeItem: FC<LostDatum & { resetData: () => void }> = (props) => {
     <View className="mt-2 fx gap-2 p-3 shadow-md bg-white">
       <Image
         src={cover}
-        style={{ width: '150px', height: '100px' }}
+        style={{ width: '170px', height: '110px' }}
         mode="aspectFill"
         placeholder={!cover && '暂无图片'}
       />

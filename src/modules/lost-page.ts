@@ -24,6 +24,7 @@ export interface FoundDatum {
   contact: string;
   category: string;
   foundTime: string;
+  place:string
   detail: string;
   image?: string[];
   cover: string;
@@ -40,6 +41,7 @@ export interface LostDatum {
   title: string;
   contact: string;
   cover: string;
+  place:string
   category: string;
   lostTime: string;
   detail: string;

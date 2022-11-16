@@ -11,7 +11,7 @@ import {
 import ContentLayout from '@/components/layouts/BasicLayout'
 import MySkeleton from '@/components/universal/Skeleton'
 import type { FoundDatum, LostDatum } from '@/modules/lost-page'
-import { Cell } from '@taroify/core'
+import { Cell, Dialog } from '@taroify/core'
 import { getCurrentInstance, useLoad } from '@tarojs/taro'
 
 interface routerParamsType {
@@ -41,6 +41,7 @@ const DynamicDetail = () => {
   }
   return (
     <Cell>
+        <Dialog id="dialog" />
       <ContentLayout>
           {<DynamicAvatar dynamicDetail={dynamicDetail} isLost={lost} />}
           {<DetailContent dynamicDetail={dynamicDetail} isLost={lost} />}
