@@ -1,6 +1,9 @@
 ## 失物招领微信小程序
-目前正在努力开发中...
+
+采用 [Taro]('https://github.com/nervjs/taro') 框架，目前正在努力开发中...
+
 ## 开发
+
 ```
 pnpm i
 pnpm dev:weapp
@@ -19,6 +22,4 @@ pnpm dev:weapp
 
 ## 补充
 
-[后端](https://github.com/suemor233/LostAndFound-Core) 
-
-
+[后端](https://github.com/suemor233/LostAndFound-Core)
