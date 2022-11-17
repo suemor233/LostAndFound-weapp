@@ -1,6 +1,6 @@
 ## 失物招领微信小程序
 
-采用 [Taro]('https://github.com/nervjs/taro') 框架，目前正在努力开发中...
+采用 [Taro](https://github.com/nervjs/taro) 框架，目前正在努力开发中...
 
 ## 开发
 
