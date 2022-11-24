@@ -7,6 +7,7 @@ export default {
     'pages/publish/index',
     'pages/publish/seek/index',
     'pages/user/index',
+    'pages/user/setting/index',
     'pages/user/management/index',
 
   ],

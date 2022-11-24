@@ -71,4 +71,6 @@ export default class UserStore {
     return !!this.user
   }
 
+
+
 }

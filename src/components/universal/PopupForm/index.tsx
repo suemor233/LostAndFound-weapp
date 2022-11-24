@@ -26,7 +26,7 @@ const PopupForm: FC<IProps> = ({
 }) => {
   return (
     <>
-      <Form.Item ref={itemRef as any} name={formName} clickable rightIcon={<Choice />}>
+      <Form.Item ref={itemRef} name={formName} clickable rightIcon={<Choice />}>
         <Form.Label>{title}</Form.Label>
         <Form.Control>
           {inputValue ? (

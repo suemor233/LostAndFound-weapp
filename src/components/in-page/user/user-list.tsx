@@ -9,8 +9,8 @@ import styles from './index.module.css'
 const UserList = () => {
   const handleShowModal = () => {
     Taro.showModal({
-      title: '更新日志',
-      content: '暂无更新日志',
+      title: '暂无内容',
+      content: '暂无内容',
       showCancel:false
     })
   }
@@ -22,7 +22,7 @@ const UserList = () => {
             open-type={item.openType}
             className={styles.button}
             onClick={
-              item.title === '更新日志' ? () => handleShowModal() : undefined
+              item.title === '更新日志' || item.title === '关于' ? () => handleShowModal() : undefined
             }
           >
             <Text>{item.title}</Text>

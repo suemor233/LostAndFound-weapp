@@ -10,7 +10,7 @@ const LoginAuth: FC<PropsWithChildren> = ({ children }) => {
         Taro.switchTab({
           url: '/pages/user/index',
         })
-      
+
       }
   })
 

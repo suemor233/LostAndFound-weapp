@@ -1,0 +1,16 @@
+.button {
+  width: 100%;
+  background: white;
+  border: none;
+  text-align: left;
+  padding: 7px 0px;
+  margin: 0px;
+  line-height: 1.6;
+  display: flex;
+  justify-content: left;
+  &::after {
+    border: none;
+    border-radius: 0;
+  }
+  
+}

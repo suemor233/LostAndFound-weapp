@@ -16,7 +16,7 @@ export function getUserInfo() {
   return client.get('/user')
 }
 
-export function patchUser(data: LoginType) {
+export function patchUser(data: Omit<LoginType,'avatarUrl'>) {
   return client.patch('/user', data )
 }
 
