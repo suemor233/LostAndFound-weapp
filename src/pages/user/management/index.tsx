@@ -17,7 +17,7 @@ const UserManagement = () => {
   useEffect(() => {
     if (router.params.type === 'lost') {
       setTab(0)
-    } else if (router.params.type === 'alreayLost') {
+    } else if (router.params.type === 'alreadyLost') {
       setTab(1)
     } else if (router.params.type === 'found') {
       setTab(2)

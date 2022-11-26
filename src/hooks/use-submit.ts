@@ -49,7 +49,7 @@ export const useSubmit = (type: string, update: string | undefined) => {
               })
           }
         })
-        if (!value.image.find((item) => item.url.includes('tmp'))) {
+        if (!value.image.find((item) => item.url.includes('//tmp'))) {
           Toast.success({
             message: '修改成功,将为您跳转到首页',
             onClose: () => {
@@ -88,7 +88,7 @@ export const useSubmit = (type: string, update: string | undefined) => {
         setNotify(true)
 
         value.image.forEach(async (item, index) => {
-          if (item.url.includes('tmp')) {
+          if (item.url.includes('//tmp')) {
             setTimeout(
               () => {
                 Taro.uploadFile({

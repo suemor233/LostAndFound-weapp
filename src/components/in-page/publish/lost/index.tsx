@@ -31,6 +31,7 @@ const LostForm = () => {
         timeLabel="丢失日期"
         otherLabel="丢失地点 / 外观 / 特征 等"
         onSubmit={(event) => onSubmit(event,_defaultData.current)}
+        place="丢失地点"
         formName="lostTime"
         disabled={disabled}
         defaultData={defaultData}

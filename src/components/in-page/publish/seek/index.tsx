@@ -27,7 +27,7 @@ const SeekForm = () => {
       titlePlaceholder="例: 捡到 xx"
       timeLabel="捡到日期"
       otherLabel="领取地点 / 外观 / 特征 等"
-      
+      place="捡到地点"
       onSubmit={(event) => onSubmit(event,_defaultData.current)}
       formName="foundTime"
       disabled={disabled}

@@ -81,8 +81,7 @@ const onSubmit = async (
   userStore: UserStore,
 ) => {
   await patchUser({ nickName: event.detail.value?.nickName })
-
-  if (!event.detail.value?.avatar.includes('tmp')) {
+  if (!event.detail.value?.avatar.includes('//tmp')) {
     return Toast.success({
       message: '修改成功',
       onClose: async () => {

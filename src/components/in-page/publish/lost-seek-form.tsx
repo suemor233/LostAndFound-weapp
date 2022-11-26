@@ -26,6 +26,7 @@ interface LostSeekFormProps {
   timeLabel: string
   otherLabel: string
   formName: string
+  place: string
   disabled: boolean
   onSubmit?: (event: BaseEventOrig<FormProps.onSubmitEventDetail>) => void
   defaultData?: ILost | IFound | null
@@ -40,6 +41,7 @@ const LostSeekForm: FC<LostSeekFormProps> = (props) => {
     onSubmit,
     disabled,
     defaultData,
+    place
   } = props
   return (
     <Form onSubmit={onSubmit} >
@@ -58,7 +60,7 @@ const LostSeekForm: FC<LostSeekFormProps> = (props) => {
           </Form.Control>
         </Form.Item>
         <Form.Item name="place" defaultValue={defaultData?.place}>
-          <Form.Label>捡到地点</Form.Label>
+          <Form.Label>{place}</Form.Label>
           <Form.Control>
             <Input placeholder="例: xx学校xx食堂"  />
           </Form.Control>
