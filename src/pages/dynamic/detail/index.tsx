@@ -26,7 +26,7 @@ const DynamicDetail = () => {
   useLoad(async () => {
     const routerParams = getCurrentInstance().router?.params as routerParamsType
     let res
-    if (routerParams.category === '失物') {
+    if (routerParams.category === '丢失') {
       res = await lostById(routerParams.id as string)
       setDynamicDetail(res)
       setLost(true)

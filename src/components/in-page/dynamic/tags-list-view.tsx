@@ -125,11 +125,11 @@ const ListView: FC<{ selectedTab: string }> = observer((props) => {
     >
       <View className={styles['grid-masonry']}>
         {lostFoundStore.lost.map((item) => (
-          <ListItem item={item} key={item._id} title={'失物'} />
+          <ListItem item={item} key={item._id} title={'丢失'} />
         ))}
 
         {lostFoundStore.found.map((item) => (
-          <ListItem item={item} key={item._id} title={'寻物'} />
+          <ListItem item={item} key={item._id} title={'捡到'} />
         ))}
       </View>
       <List.Placeholder>

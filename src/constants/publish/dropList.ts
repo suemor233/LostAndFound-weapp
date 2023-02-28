@@ -2,16 +2,16 @@ import { PATH } from '@/constants/path';
 
 export const dropList = [
   {
-    title: '发寻求',
-    subtitle: '捡到了他人物品',
+    title: '捡到物品',
+    subtitle: '当我捡到了他人的物品',
     icon: 'https://y.suemor.com/imagespublish-seek.png',
     backgroundColor: '#FFF3EE',
     width: 40,
     url:PATH.PUBLISH_SEEK
   },
   {
-    title: '找丢失',
-    subtitle: '我丢失了物品',
+    title: '丢失物品',
+    subtitle: '当我丢失了自己的物品',
     icon: 'https://y.suemor.com/imagespublish-lost.png',
     backgroundColor: '#FFF3DE',
     width: 40,

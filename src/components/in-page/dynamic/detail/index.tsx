@@ -58,7 +58,7 @@ export const DynamicAvatar = <T extends boolean>(props: IProps<T>) => {
                 padding: '0 10px',
               }}
             >
-              {isLost ? '失物' : '寻物'}
+              {isLost ? '丢失' : '捡到'}
             </Tag>
           </View>
           <Text className="text-gray-400 text-xs">
